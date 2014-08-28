@@ -1,7 +1,7 @@
 <?php
 class Carteiro {
 	static function emailCadastro($email, $token) {
-		$app = explode("/", $_SERVER['REQUEST_URI'])[1]];
+		$app = explode("/", $_SERVER['REQUEST_URI'])[1];
 		
 		$assunto = "[Coconut] Bem vindo!";
 
@@ -15,7 +15,7 @@ class Carteiro {
 	}
 
 	static function emailSenha($email, $token) {
-		$app = explode("/", $_SERVER['REQUEST_URI'])[1]];
+		$app = explode("/", $_SERVER['REQUEST_URI'])[1];
 		
 		$assunto = "[Coconut] Redefinir senha";
 

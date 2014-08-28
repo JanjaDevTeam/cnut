@@ -1,6 +1,7 @@
 <?php
 require_once('model/database.php');
 require_once('model/user.php');
+require_once('model/carteiro.php');
 require_once("controller/controller_login.php");
 require_once('lib/janja.php');
 
@@ -14,7 +15,7 @@ if (isset($_POST['nome'])) {
 	$senha2 = $_POST['senha2'];
 	
 	$ct = new ControllerLogin;
-	$ct->registrar($nome, email, senha, senha2);
+	$ct->registrar($nome, $email, $senha, $senha2);
 	
 }
 

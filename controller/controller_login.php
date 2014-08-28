@@ -69,6 +69,7 @@ class ControllerLogin {
 		//registra token de ativação
 		$token  = $this->genToken();
 		$idUser = $user->getId();
+		$now    = $user->getNow();
 		$motivo = "cadastro";
 		$db->saveToken($idUser, $now, $token, $motivo);
 		
@@ -80,7 +81,7 @@ class ControllerLogin {
 	
 	// gera token para cadastro de conta e recuperação de senha
 	public function genToken() {
-		$gen = "J4NJ4D3VT34M-Coconut2014" . $this->getNow();
+		$gen = "J4NJ4D3VT34M-Coconut2014" . date("Y-m-d H:i:s");
 		return md5($gen);
 	}
 
