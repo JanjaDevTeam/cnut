@@ -14,7 +14,7 @@
 					<a href="#" class="pull-right need-help">Esqueci a senha </a><span class="clearfix"></span>
 				</form>
 			</div>
-			<a href="#" class="text-center new-account">Criar uma conta </a>
+			<a href="registrar.php" class="text-center new-account">Criar uma conta </a>
 			<br/>
 		</div>
 	</div>

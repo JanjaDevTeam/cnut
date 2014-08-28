@@ -47,7 +47,7 @@ class Database extends PDO {
 		
 		if ($id == null) {
 			$sql = "INSERT INTO user (nome, email, senha, fbId, dataRegistro, dataAcesso, ativo) 
-			VALUES ('$nome', '$email', '$senha', 'fbId', '$dataRegistro', '$dataAcesso', $ativo)";
+			VALUES ('$nome', '$email', '$senha', '$fbId', '$dataRegistro', '$dataAcesso', $ativo)";
 			$stmt = $this->prepare($sql);
 			$result = $stmt->execute();
 			$id = $this->lastInsertId();

@@ -7,11 +7,12 @@
 	if(isset($_SESSION['id'])) {
 		// se fb, pega foto do fb
 		$sufixo  = isset($_SESSION['fbId']) ? '-fb.jpg' : '.jpg';
-		$userpic = 'img/userpics' . $_SESSION['id'] . $sufixo;
+		$userpic = 'img/userpics/' . $_SESSION['id'] . $sufixo;
 	?>
 		<li><a href="logout.php">LOGOUT</a></li>
 		<li class="userpic"><a href="index.html"><img src="<?= $userpic ?>" class="img-circle"/></a></li>
-	<?php} else { ?>
+	<?php
+	} else { ?>
 		<li><a href="logar.php">LOGAR</a></li>
 	<?php } ?>
 	
