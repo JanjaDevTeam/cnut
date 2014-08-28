@@ -3,5 +3,6 @@ require 'lib/fbconfig.php';
 $facebook->destroySession();  // to destroy facebook sesssion
 $_SESSION = Null;
 session_destroy();
-header("Location: http://" . $_SERVER['HTTP_HOST'] . "/cnut/logar.php");
+$app = explode("/", $_SERVER['REQUEST_URI'])[1];
+header("Location: http://" . $_SERVER['HTTP_HOST'] . "/" . $app . "cnut/logar.php");
 ?>

@@ -62,6 +62,15 @@ class Database extends PDO {
 		return $user;
 	}
 	
+	public function saveToken($idUser, $dataRegistro, $token, $motivo) {
+		$sql = "INSERT INTO token (idUser, dataRegistro, token, motivo) 
+		VALUES ($idUser, '$dataRegistro', '$token', '$motivo')";
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+
+		return true;
+	}
+	
 	public function getUserById($id) {
 		$sql = "SELECT nome, email, senha, fbId, dataRegistro, dataAcesso, ativo FROM user 
 		WHERE id = " . $id;
@@ -96,5 +105,6 @@ class Database extends PDO {
 		}
 		return False;
 	}
+	#### /USER
 	
 }

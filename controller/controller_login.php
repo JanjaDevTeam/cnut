@@ -66,7 +66,22 @@ class ControllerLogin {
 		$db = new Database;
 		$user = $db->saveUser($user);
 		
+		//registra token de ativação
+		$token  = $this->genToken();
+		$idUser = $user->getId();
+		$motivo = "cadastro";
+		$db->saveToken($idUser, $now, $token, $motivo);
+		
+		// envia email, 24 horas para ativar.
+		Carteiro::emailCadastro($email, $token);
+		
 		Janja::Debug($user);
+	}
+	
+	// gera token para cadastro de conta e recuperação de senha
+	public function genToken() {
+		$gen = "J4NJ4D3VT34M-Coconut2014" . $this->getNow();
+		return md5($gen);
 	}
 
 }
