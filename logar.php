@@ -16,6 +16,22 @@ if(isset($_GET['code'])) {
 	}
 }
 
+// caso venha do form, loga pela conta
+if (isset($_POST['email'])) {
+	$controller = new ControllerLogin;
+	$user = new User;
+	$user->setEmail($_POST['email']);
+	$user->setSenha($_POST['senha']);
+	
+	$logar = $controller->loginForm($user);
+	Janja::Debug($logar);
+	if ($logar == true) {
+		header('location: index.php');
+	} else {
+		header('location: forbiden.php');
+	}
+}
+
 
 $template['page'] = 'logar';
 require_once('template/main.php');

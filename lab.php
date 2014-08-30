@@ -1,6 +1,6 @@
 <?php
 require_once('lib/janja.php');
-$targ_w = $targ_h = 150;
+$targ_w = $targ_h = 50;
 $jpeg_quality = 90;
 
 $src = $_POST['img'];
@@ -31,7 +31,9 @@ $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
 imagecopyresampled($dst_r,$img_r,0,0,$x,$y,
     $targ_w,$targ_h,$w,$h);
 
-header('Content-type: image/jpeg');
-imagejpeg($dst_r, null, $jpeg_quality);
+session_start();
 
+header('Content-type: image/jpeg');
+imagejpeg($dst_r, 'img/userpics/' . $_SESSION['id'] . '.jpg', $jpeg_quality);
+header('location: index.php');
 ?>

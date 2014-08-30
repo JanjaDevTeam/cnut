@@ -1,5 +1,11 @@
 <!-- avisos -->
 <div class="container">
+	<?php if (isset($template['alertaFoto']) && $template['alertaFoto'] == true): ?>
+	<div class="alert alert-info">
+		<p>Você ainda não tem foto. <a href="userpic.php">Clique aqui</a> para enviar.</p>
+	</div>
+	<?php endif; ?>
+	
 	<div class="row destaque">
 		<div class="col-sm-4">
 			<img src="img/destaque-3.jpg"/>

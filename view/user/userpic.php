@@ -6,7 +6,10 @@
 				<img src="<?=$template['foto']?>" id="target" name='target' class="img-responsive"/>
 			</div>
 			<?php else: ?>
-				<img src="img/destaque-1.jpg" class="img-responsive"/>
+				
+				<h2>Escolha uma foto!</h2>
+				<br/>
+				<br/>
 			<?php endif; ?>
 		</div>
 	

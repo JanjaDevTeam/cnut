@@ -50,8 +50,19 @@ class ControllerLogin {
 	}
 	
 	// loga pelo formulário de login
-	public function loginAccount() {
-		// implementar
+	public function loginForm($user) {
+		$db = new Database;
+		$logar = $db->logar($user);
+		
+		if ($logar == true) {
+			$user = $db->getUserByEmail($user->getEmail());
+			$_SESSION['id']    = $user->getId();
+			$_SESSION['nome']  = $user->getNome();
+			$_SESSION['email'] = $user->getEmail();
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	// registra usuário pelo formulário

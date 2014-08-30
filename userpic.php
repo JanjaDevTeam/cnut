@@ -1,6 +1,7 @@
 <?php
 require_once('lib/janja.php');
 
+session_start();
 
 if(isset($_FILES['upfile'])) {
 	$tmp = $_FILES['upfile']['tmp_name'];

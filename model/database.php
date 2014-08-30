@@ -124,7 +124,34 @@ class Database extends PDO {
 		return true;
 	}
 	
+	public function deleteToken($token) {
+		$sql = 'DELETE FROM token WHERE token = ' . $token;
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		
+		return true;
+	}
+	
 	#### /USER
+	
+	#### LOGIN
+	public function logar($user) {
+		$email = $user->getEmail();
+		$senha = $user->getSenha();
+		$sql = "SELECT id FROM user WHERE email = '$email' AND senha = '$senha'";
+		
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		if (sizeof($result) == 0) {
+			return false;
+		} else if(sizeof($result) == 1) {
+			$user = $this->getUserByEmail($email);
+			
+			return $user;
+		}
+	}
 	
 	
 }

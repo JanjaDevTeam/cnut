@@ -11,9 +11,9 @@
 			<div class="account-wall">
 				<img class="profile-img" src="img/login.png"
 				alt="">
-				<form class="form-signin">
-					<input type="text" class="form-control" placeholder="Email" required autofocus>
-					<input type="password" class="form-control" placeholder="Senha" required>
+				<form class="form-signin" action="logar.php" method="post">
+					<input type="text" name="email" class="form-control" placeholder="Email" required autofocus>
+					<input type="password" name="senha" class="form-control" placeholder="Senha" required>
 					<button class="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
 					<a href="<?php echo $loginUrl; ?>"><button class="btn btn-lg btn-primary btn-block btn-fb" type="button">Facebook</button></a>
 					
