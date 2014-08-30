@@ -12,6 +12,7 @@ class ControllerLogin {
 		if ($user != null) {
 			// já cadastrado, atualiza foto e acesso
 			$user->setDataAcesso($user->getNow());
+			$user = $db->saveUser($user);
 			// copia foto do fb para pasta img/userpics
 			$url = "https://graph.facebook.com/" .  $fbid . "/picture?type=square";
 			$img = "img/userpics/" . $user->getId() . "-fb.jpg";

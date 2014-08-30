@@ -1,5 +1,7 @@
 <?php
 class Carteiro {
+	
+	// email para ativação de conta
 	static function emailCadastro($email, $token) {
 		$app = explode("/", $_SERVER['REQUEST_URI'])[1];
 		
@@ -14,6 +16,7 @@ class Carteiro {
 
 	}
 
+	//email para recuperar senha
 	static function emailSenha($email, $token) {
 		$app = explode("/", $_SERVER['REQUEST_URI'])[1];
 		
