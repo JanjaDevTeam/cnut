@@ -25,7 +25,7 @@
 				<input type="hidden" id="h" name="h" />
 				<input type="hidden" name="scrw" id="screen_width" value=""/>
 				<input type="hidden" id="img" name="img" value="<?=$template['foto']?>"/>
-				<input type="submit" value="Crop Image" name="botao"/>
+				<input type="submit" value="Cortar imagem" name="botao"/>
 			</form>
 		</div>
 		<?php else: ?>

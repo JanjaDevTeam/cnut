@@ -46,7 +46,7 @@
 						require_once('view/main_menu.php');
 					} 
 					
-					 ?>
+				?>
 			</div>
 		</div>
 	</div>

@@ -41,7 +41,13 @@
 			</div>
 			
 			<div class="navbar-collapse collapse">
-				<?php require_once('view/main_menu.php'); ?>
+				<?php if(isset($_SESSION['id'])) { 
+						require_once('view/main_menu_logado.php');
+					} else {
+						require_once('view/main_menu.php');
+					} 
+					
+				?>
 			</div>
 		</div>
 	</div>

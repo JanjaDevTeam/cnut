@@ -1,6 +1,6 @@
 <?php
 require_once('lib/janja.php');
-$targ_w = $targ_h = 50;
+$targ_w = $targ_h = 150;
 $jpeg_quality = 90;
 
 $src = $_POST['img'];

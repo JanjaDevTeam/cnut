@@ -14,6 +14,6 @@
 	
 	?>
 	<li><a href="logout.php">LOGOUT</a></li>
-	<li class="userpic"><a href="index.html"><img src="<?= $userpic ?>" class="img-circle"/></a></li>
+	<li class="userpic"><a href="userpic.php"><img src="<?= $userpic ?>" class="img-circle"/></a></li>
 	
 </ul>

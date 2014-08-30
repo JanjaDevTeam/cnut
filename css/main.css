@@ -47,7 +47,10 @@ body {
     vertical-align: middle;
 }
 
-
+.userpic img {
+	width: 50px;
+	height: auto;
+}
 
 
 @media (min-width: 768px) { 
