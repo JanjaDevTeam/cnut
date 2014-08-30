@@ -5,6 +5,9 @@
 	<br/>
 </div>
 <div class="col-sm-6 col-md-4">
+	<?php if (isset($template['erro'])): ?>
+	<div class="alert alert-danger" role="alert"><?=$template['erro'][0]?></div>
+	<?php endif; ?>
 	
 	<form method="post" action="registrar.php">
 		<div class="form-group">

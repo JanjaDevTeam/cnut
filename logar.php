@@ -17,6 +17,6 @@ if(isset($_GET['code'])) {
 }
 
 
-$content = 'logar';
+$template['page'] = 'logar';
 require_once('template/main.php');
 ?>

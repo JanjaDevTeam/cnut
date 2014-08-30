@@ -56,16 +56,41 @@ class ControllerLogin {
 	
 	// registra usuário pelo formulário
 	public function registrar($nome, $email, $senha, $senha2) {
-		$user = new User;
-		$user->setNome($nome);
-		$user->setEmail($email);
-		$user->setSenha($senha);
-		$user->setDataRegistro($user->getNow());
-		$user->setDataAcesso($user->getDataRegistro());
-		$user->setAtivo(0);
+		$erro = array();
+		// valida senha
+		if ($senha != $senha2) {
+			$erro[] = "As senhas não batem.";
+			return $erro;
+		}
 		
+		// verifica se existe
 		$db = new Database;
-		$user = $db->saveUser($user);
+		$user = $db->getUserByEmail($email);
+		
+		// caso exista o usuário
+		if ($user != null) {
+			// se a senha estiver em branco, cadastrou pelo facebook
+			if ($user->getSenha() != null) {
+				$erro[] = "Este email já está cadastrado.";
+				return $erro;
+			// caso contrário, seta senha e salva
+			} else {
+				$user->setSenha($senha);
+				$user = $db->saveUser($user);
+			}
+		// caso não exista, cadastra
+		} else {
+		
+			$user = new User;
+			$user->setNome($nome);
+			$user->setEmail($email);
+			$user->setSenha($senha);
+			$user->setDataRegistro($user->getNow());
+			$user->setDataAcesso($user->getDataRegistro());
+			$user->setAtivo(0);
+			
+			$user = $db->saveUser($user);
+		}
 		
 		//registra token de ativação
 		$token  = $this->genToken();
@@ -76,8 +101,8 @@ class ControllerLogin {
 		
 		// envia email, 24 horas para ativar.
 		Carteiro::emailCadastro($email, $token);
-		
-		Janja::Debug($user);
+
+		return $erro;
 	}
 	
 	// gera token para cadastro de conta e recuperação de senha

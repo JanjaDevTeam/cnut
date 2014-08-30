@@ -48,7 +48,7 @@
 	<div class="container">
 	<!-- insert data -->
 	<?php
-	if(isset($content)) { require_once('view/' . $content . '.php'); }
+	if(isset($template['page'])) { require_once('view/' . $template['page'] . '.php'); }
 	?>
 	</div>
 		

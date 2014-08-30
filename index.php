@@ -3,6 +3,6 @@ require_once('lib/janja.php');
 
 session_start();
 
-$content = "main";
+$template['page'] = "main";
 require_once('template/main.php');
 ?>

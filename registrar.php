@@ -15,10 +15,23 @@ if (isset($_POST['nome'])) {
 	$senha2 = $_POST['senha2'];
 	
 	$ct = new ControllerLogin;
-	$ct->registrar($nome, $email, $senha, $senha2);
+	$registrar = $ct->registrar($nome, $email, $senha, $senha2);
+	
+	// caso retorne erros
+	if (sizeof($registrar) > 0) {
+		$template['page'] = "user/registrar";
+		$template['erro'] = $registrar;
+	} else {
+		$template['page'] = "user/registrar_email_enviado";
+	
+	}
+	require_once('template/main.php');
+
+// caso venha do link	
+} else {
+
+	$template['page'] = "user/registrar";
+	require_once('template/main.php');
 	
 }
-
-$content = "user/registrar";
-require_once('template/main.php');
 ?>
