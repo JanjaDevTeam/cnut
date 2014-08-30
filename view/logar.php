@@ -1,3 +1,9 @@
+<?php if(isset($template['bemvindo'])): ?>
+<div class="alert alert-success">
+<p><strong>Bem vindo!</strong> Seu cadastro foi ativado e você já pode participar de projetos.</p>
+</div>
+<?php endif; ?>
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">

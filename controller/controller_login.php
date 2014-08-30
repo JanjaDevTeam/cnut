@@ -28,7 +28,7 @@ class ControllerLogin {
 			$user->setFbId($fbid);
 			$user->setDataRegistro($user->getNow());
 			$user->setDataAcesso($user->getNow());
-			$user->setAtivo(1);
+			$user->setAtivo(0);
 			$user = $db->saveUser($user);
 			
 			// copia foto do fb para pasta img/userpics
@@ -70,12 +70,13 @@ class ControllerLogin {
 		// caso exista o usuário
 		if ($user != null) {
 			// se a senha estiver em branco, cadastrou pelo facebook
-			if ($user->getSenha() != null) {
+			if ($user->getAtivo() == 1) {
 				$erro[] = "Este email já está cadastrado.";
 				return $erro;
 			// caso contrário, seta senha e salva
 			} else {
 				$user->setSenha($senha);
+				$user->setNome($nome);
 				$user = $db->saveUser($user);
 			}
 		// caso não exista, cadastra
