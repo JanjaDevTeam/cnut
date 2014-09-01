@@ -116,6 +116,16 @@ class Database extends PDO {
 		return $result;
 	}
 	
+	public function verificarToken($idUser, $motivo) {
+		$sql = 'SELECT COUNT(id) as total FROM token WHERE idUser = ' . $idUser . 
+		' AND motivo = \'' . $motivo . '\' AND dataRegistro > (NOW() - INTERVAL 1 DAY)';
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result['0']['total'];
+	}
+	
 	public function deleteOldTokens() {
 		$sql = "delete from token where dataRegistro < (NOW() - INTERVAL 1 DAY)";
 		$stmt = $this->prepare($sql);
@@ -125,7 +135,7 @@ class Database extends PDO {
 	}
 	
 	public function deleteToken($token) {
-		$sql = 'DELETE FROM token WHERE token = ' . $token;
+		$sql = "DELETE FROM token WHERE token = '$token'";
 		$stmt = $this->prepare($sql);
 		$result = $stmt->execute();
 		
@@ -152,6 +162,43 @@ class Database extends PDO {
 			return $user;
 		}
 	}
+	
+	// redefine senha
+	public function redefinirSenha($user) {
+		$sql = "UPDATE user SET senha = '" . $user->getSenha() . "' 
+		WHERE id = " . $user->getId();
+		
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		
+		return true;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

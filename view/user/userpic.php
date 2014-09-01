@@ -18,7 +18,7 @@
 		<?php if (isset($template['foto'])): ?>
 		<div class="text-center">
 			<p>Selecione a área desejada na imagem.</p>
-			<form action="lab.php" method="post" onsubmit="return checkCoords();">
+			<form action="userpic_crop.php" method="post" onsubmit="return checkCoords();">
 				<input type="hidden" id="x" name="x" />
 				<input type="hidden" id="y" name="y" />
 				<input type="hidden" id="w" name="w" />

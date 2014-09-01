@@ -100,7 +100,7 @@
 		{
 			document.getElementById("screen_width").value = jQuery('#target').outerWidth();
 			if (parseInt(jQuery('#w').val())>0) return true;
-			alert('Please select a crop region then press submit.');
+			alert('Por favor, selecione a região a ser cortada.');
 			return false;
 		};
 	</script>

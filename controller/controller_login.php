@@ -122,6 +122,83 @@ class ControllerLogin {
 		$gen = "J4NJ4D3VT34M-Coconut2014" . date("Y-m-d H:i:s");
 		return md5($gen);
 	}
-
+	
+	// recuperar senha
+	public function recuperarSenha ($email) {
+		// verifica se o email existe
+		$db = new Database;
+		$user = $db->getUserByEmail($email);
+		if($user != null) {
+			// usuário existe, gera token e envia email
+			
+			// verifica se existe token de senha nas últimas 24 horas
+			$qtd = $db->verificarToken($user->getId(), 'senha');
+			if ($qtd == 1) {
+				// token já enviado
+				return 'token';
+			}
+			
+			
+			//registra token de ativação
+			$token  = $this->genToken();
+			$idUser = $user->getId();
+			$now    = $user->getNow();
+			$motivo = "senha";
+			$db->saveToken($idUser, $now, $token, $motivo);
+			Carteiro::emailSenha($email, $token);
+			
+			return 'enviado';
+		} else {
+			// usuário não exisste
+			return 'user';
+		}
+	}
+	
+	// chama formulário e ativa a senha
+	public function recuperarSenhaToken($token) {
+		$db = new Database;
+		$token = $db->getTokenByToken($token);
+		if (sizeof($token) == 1) {
+			// token existe
+			$idUser = $token[0]['idUser'];
+			$qtd = $db->verificarToken($idUser, 'senha');
+			if ($qtd == 1) {
+				// token dentro do prazo
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+		
+		// redefinir senha
+		public function redefinirSenha($idUser, $senha, $senha2, $token) {
+			if($senha != $senha2 || strlen($senha) < 3) {
+				return false;
+			} else {
+				$db = new Database;
+				$user = new user;
+				$user->setId($idUser);
+				$user->setSenha($senha);
+				
+				// verifica validade
+				$token = $db->getTokenByToken($token);
+				if (sizeof($token) == 1) {
+					$qtd = $db->verificarToken($idUser, 'senha');
+					if ($qtd == 1) {
+						// token dentro do prazo
+						$db->redefinirSenha($user);
+						$db->deleteToken($token[0]['token']);
+						return true;
+					} else {
+						return false;
+					}
+				}
+					
+			} 
+			
+		}
 }
 ?>

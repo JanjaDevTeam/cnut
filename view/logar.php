@@ -17,7 +17,7 @@
 					<button class="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
 					<a href="<?php echo $loginUrl; ?>"><button class="btn btn-lg btn-primary btn-block btn-fb" type="button">Facebook</button></a>
 					
-					<a href="#" class="pull-right need-help">Esqueci a senha </a><span class="clearfix"></span>
+					<a href="recuperar_senha.php" class="pull-right need-help">Esqueci a senha </a><span class="clearfix"></span>
 				</form>
 			</div>
 			<a href="registrar.php" class="text-center new-account">Criar uma conta </a>
