@@ -32,7 +32,7 @@ if (isset($_POST['email'])) {
 	}
 }
 
-
+$template['menu'] = 'logar';
 $template['page'] = 'logar';
 require_once('template/main.php');
 ?>

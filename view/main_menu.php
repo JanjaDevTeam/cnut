@@ -1,5 +1,5 @@
 <ul class="nav navbar-nav navbar-right">
-	<li><a href="index.html">EXPLORAR</a></li>
-	<li class="active"><a href="#">ENVIAR PROJETO</a></li>
-	<li><a href="logar.php">LOGAR</a></li>
+	<li class="<?php if($template['menu']=='explorar'){echo 'active';}?>"><a href="index.html"><strong>EXPLORAR</strong></a></li>
+	<li class="<?php if($template['menu']=='enviar'){echo 'active';}?>"><a href="enviar_projeto.php"><strong>ENVIAR PROJETO</strong></a></li>
+	<li class="<?php if($template['menu']=='logar') {echo 'active';}?>"><a href="logar.php"><strong>LOGAR</strong></a></li>
 </ul>

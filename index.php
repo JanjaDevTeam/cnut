@@ -11,7 +11,7 @@ if (isset($_SESSION['id'])) {
 	}
 }
 
-
+//$template['menu'] = '';
 $template['page'] = "main";
 require_once('template/main.php');
 ?>

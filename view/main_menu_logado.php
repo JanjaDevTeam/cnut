@@ -1,6 +1,6 @@
 <ul class="nav navbar-nav navbar-right">
-	<li><a href="index.html">EXPLORAR</a></li>
-	<li class="active"><a href="#">ENVIAR PROJETO</a></li>
+	<li class="<?php if($template['menu']=='logar'){echo 'active';}?>"><a href="index.html"><strong>EXPLORAR</strong></a></li>
+	<li class="<?php if($template['menu']=='enviar'){echo 'active';}?>"><a href="enviar_projeto.php"><strong>ENVIAR PROJETO</strong></a></li>
 	
 	<?php 
 	// se fb, pega foto do fb
@@ -13,7 +13,7 @@
 	
 	
 	?>
-	<li><a href="logout.php">LOGOUT</a></li>
+	<li><a href="logout.php"><strong>LOGOUT</strong></a></li>
 	<li class="userpic"><a href="userpic.php"><img src="<?= $userpic ?>" class="img-circle"/></a></li>
 	
 </ul>
