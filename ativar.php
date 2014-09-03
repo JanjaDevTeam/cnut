@@ -26,10 +26,11 @@ if (!isset($_GET['t'])) {
 				$user = $db->saveUser($user);
 				
 				// solução temporária
+				$db->deleteToken($token);
 				$template['page'] = "logar";
 				$template['bemvindo'] = true;
 				require_once('template/main.php');
-				$db->deleteToken($token);
+				
 			// mais de 24 horas, apaga o token
 			} else {
 				$db->deleteOldTokens();

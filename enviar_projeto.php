@@ -8,7 +8,7 @@ $template['menu'] = 'enviar';
 if(isset($_SESSION['id'])) {
 	$template['page'] = 'projeto/termos';
 } else {
-	$template['page'] = "projeto/enviar_projeto";
+	$template['page'] = "projeto/projeto_aviso";
 }
 
 
