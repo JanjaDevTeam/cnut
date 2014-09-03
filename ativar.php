@@ -26,7 +26,7 @@ if (!isset($_GET['t'])) {
 				$user = $db->saveUser($user);
 				
 				// solução temporária
-				$db->deleteToken($token);
+				$db->deleteToken($token[0]['token']);
 				$template['page'] = "logar";
 				$template['bemvindo'] = true;
 				require_once('template/main.php');

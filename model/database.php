@@ -175,6 +175,102 @@ class Database extends PDO {
 		
 	}
 	
+	#### PROJETOS
+	
+	public function getCategorias() {
+		$sql = "SELECT id, categoria FROM categoria";
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $result;
+	}
+	
+	public function getProjeto($id) {
+
+		// implementar
+		$sql = 'SELECT idUser, idCategoria, nome, descricao, frase, valor, valorArrecadado, prazo, video, links, ativo, analise, dataRegistro, categoria 
+		FROM projeto, categoria WHERE projeto.idCategoria = categoria.id AND projeto.id = ' . $id;
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$projeto = new Projeto;
+
+		$projeto->setId($id);
+		$projeto->setIdUser($result[0]['idUser']);
+		$projeto->setIdCategoria($result[0]['idCategoria']);
+		$projeto->setCategoria($result[0]['categoria']);
+		$projeto->setNome(stripslashes($result[0]['nome']));
+		$projeto->setDescricao(stripslashes($result[0]['descricao']));
+		$projeto->setFrase(stripslashes($result[0]['frase']));
+		$projeto->setValor(stripslashes($result[0]['valor']));
+		$projeto->setValorArrecadado(stripslashes($result[0]['valorArrecadado']));
+		$projeto->setPrazo(stripslashes($result[0]['prazo']));
+		$projeto->setVideo(stripslashes($result[0]['video']));
+		$projeto->setLinks(stripslashes($result[0]['links']));
+		$projeto->setDataRegistro($result[0]['dataRegistro']);
+		$projeto->setAtivo($result[0]['ativo']);
+		$projeto->setAnalise($result[0]['analise']);
+
+		return $projeto;
+
+
+	}
+	
+	public function saveProjeto($projeto) {
+		$id          = $projeto->getId();
+		$idUser      = $projeto->getIdUser();
+		$idCategoria = $projeto->getIdCategoria();
+		$nome        = addslashes($projeto->getNome());
+		$descricao   = addslashes($projeto->getDescricao());
+		$frase       = addslashes($projeto->getFrase());
+		$valor       = addslashes($projeto->getValor());
+		$valorArrecadado = addslashes($projeto->getValorArrecadado());
+		$prazo       = addslashes($projeto->getPrazo());
+		$video       = addslashes($projeto->getVideo());
+		$links       = addslashes($projeto->getLinks());
+		$ativo       = $projeto->getAtivo();
+		$analise     = $projeto->getAnalise();
+		
+		Janja::Debug($projeto);
+
+
+		if ($id == null) {
+			$valorArrecadado = 0;
+			# grava o projeto no banco
+			$sql = "INSERT INTO projeto 
+			(idUser, idCategoria, nome, descricao, frase, valor, valorArrecadado, prazo, video, links, ativo, analise) 
+			VALUES ($idUser, $idCategoria, '$nome', '$descricao', '$frase', $valor, $valorArrecadado,  $prazo, '$video', '$links', $ativo, $analise)";
+			print "<br/><br/>$sql<br/><br/>";
+			$stmt = $this->prepare($sql);
+			$result = $stmt->execute();
+			$projeto->setId($this->lastInsertId());
+
+			return $projeto;
+
+			
+
+		} else {
+
+			// testar após getProjeto
+
+			$sql = "UPDATE projeto SET 
+			idCategoria = $idCategoria, nome ='$nome', descricao='$descricao', frase='$frase', 
+			valor=$valor, valorArrecadado = $valorArrecadado, prazo='$prazo', video='$video', 
+			links='$links', ativo=$ativo, analise=$analise  
+			WHERE id = $id";
+
+			$stmt = $this->prepare($sql);
+			$result = $stmt->execute();
+
+			return $projeto;
+
+		}
+
+
+	}
+	
 	
 	
 	
