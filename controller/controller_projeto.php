@@ -13,8 +13,8 @@ class ControllerProjeto {
 		$colaboracao = $db->getColaboracaoByProjeto($id);
 		
 		// dados do usuário que criou o projeto
-		$user = $db->getUser($proj->getIdUser());
-		$nome = $user->getFullname();
+		$user = $db->getUserById($proj->getIdUser());
+		$nome = $user->getNome();
 		$nome = explode(' ', $nome);
 		$nome = $nome[0];		
 		// calcula quantas colaborações foram compradas

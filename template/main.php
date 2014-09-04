@@ -19,6 +19,11 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script src="lib/janja.js"></script>
+		<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+		<script>
+				tinymce.init({selector:'textarea'});
+		</script>
+
 	</head>
 	<body>
 	

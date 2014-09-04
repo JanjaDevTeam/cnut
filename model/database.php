@@ -267,34 +267,185 @@ class Database extends PDO {
 			return $projeto;
 
 		}
+		
 
 
 	}
 	
+	#### COLABORAÇÃO
+
+	public function getColaboracao($id) {
+		$sql = 'SELECT idProjeto, valor, descricao, qtdTotal, qtdComprada 
+		FROM colaboracao WHERE id = ' . $id;
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$colaboracao = new Colaboracao;
+		$colaboracao->setId($id);
+		$colaboracao->setIdProjeto($result[0]['idProjeto']);
+		$colaboracao->setValor($result[0]['valor']);
+		$colaboracao->setDescricao($result[0]['descricao']);
+		$colaboracao->setQtdTotal($result[0]['qtdTotal']);
+		$colaboracao->setQtdComprada($result[0]['qtdComprada']);
+
+		return $colaboracao;
+	}
 	
+	public function getColaboracaoByProjeto($idProjeto) {
+		$sql = 'SELECT id, valor, descricao, qtdTotal, qtdComprada 
+		FROM colaboracao WHERE idProjeto = ' . $idProjeto;
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		$colArray = array();
+		foreach($result as $col) {
+			$colaboracao = new Colaboracao;
+			$colaboracao->setId($col['id']);
+			$colaboracao->setIdProjeto($idProjeto);
+			$colaboracao->setValor($col['valor']);
+			$colaboracao->setDescricao($col['descricao']);
+			$colaboracao->setQtdTotal($col['qtdTotal']);
+			$colaboracao->setQtdComprada($col['qtdComprada']);
+			
+			$colArray[] = $col;
+		}
+		
+		return $colArray;
+	}
+
+
+	public function saveColaboracao($colaboracao) {
+
+
+		$id          = $colaboracao->getId();
+		$idProjeto   = $colaboracao->getIdProjeto();
+		$valor       = $colaboracao->getValor();
+		$descricao   = $colaboracao->getDescricao();
+		$qtdTotal    = $colaboracao->getQtdTotal();
+		$qtdComprada = $colaboracao->getQtdComprada();
+		if ($id == NULL) {
+			$sql = "INSERT INTO colaboracao 
+			(idProjeto, valor, descricao, qtdTotal, qtdComprada) 
+			values ($idProjeto, $valor, '$descricao', $qtdTotal, $qtdComprada)";
+
+			$stmt = $this->prepare($sql);
+			$result = $stmt->execute();
+
+			$id = $this->lastInsertId();
+			$colaboracao->setId($id);
+
+		} else {
+			$colaboracao->setId($id);
+			$sql = "UPDATE colaboracao 
+			SET valor=$valor, descricao='$descricao', qtdTotal=$qtdTotal 
+			WHERE id = $id";
+
+			$stmt = $this->prepare($sql);
+			$result = $stmt->execute();
+			
+		}
+
+
+		return $colaboracao;
+	}
+
+	public function delColaboracao($colab) {
+		$id = $colab->getId();
+
+		$erro = array();
+		//verifica se tem vendas amarradas
+		$sql = 'SELECT COUNT(id) as count FROM user_colaboracao 
+		WHERE idColaboracao =' . $id;
+		$stmt   = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$count  = $result[0]['count'];
+
+		if ($count > 0) {
+			$erro[] = 0;
+			return $erro;
+		}
+
+		$sql = 'DELETE FROM colaboracao WHERE id=' . $id;
+		print $sql;
+
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+
+		return $erro;
+	}
+
+	function getColabBySeed($seed) {
+		$sql = "SELECT idColaboracao FROM user_colaboracao WHERE seed = '$seed'";
+		$stmt   = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$idColab = $result[0]['idColaboracao'];
+
+		$colab = $this->getColaboracao($idColab);
+		return $colab;
+	}
 	
+	#### USER COLABORAÇÃO
+	function saveUserColaboracao($idUser, $idColaboracao, $seed) {
+		$sql = "INSERT INTO user_colaboracao 
+		(idUser, idColaboracao, seed) VALUES 
+		($idUser, $idColaboracao, '$seed')";
+
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+
+		return True;
+
+	}
+
+	function updateUserColaboracaoBySeed($seed, $statusPagamento) {
+		$sql = "UPDATE user_colaboracao SET statusMoip=$statusPagamento WHERE seed='$seed'";
+		print $sql;
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+
+		return True;
+
+	}
+
+	function getUserColaboracao($id) {
+		$sql = 'SELECT idUser, idColaboracao, dataRegistro 
+		FROM user_colaboracao WHERE id = ' . $id;
+
+		$stmt  = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		$uc = new UserColaboracao;
+		$uc->setId($id);
+		$uc->setIdUser($result[0]['idUser']);
+		$uc->setIdColaboracao($result[0]['idColaboracao']);
+		$uc->setDataRegistro($result[0]['dataRegistro']);
+
+		return $uc;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	#moip
+	function insertMoipNasp($data){
+		$idTransacao      = $data['idTransacao'];
+		$valor            = $data['valor'];
+		$statusPagamento  = $data['statusPagamento'];
+		$codMoip          = $data['codMoip'];
+		$formaPagamento   = $data['formaPagamento'];
+		$tipoPagamento    = $data['tipoPagamento'];
+		$emailConsumidor  = $data['emailConsumidor'];
+
+		$sql = "INSERT INTO moip_nasp 
+		(idTransacao, valor, statusPagamento, codMoip, formaPagamento, tipoPagamento, emailConsumidor) 
+		VALUES ('$idTransacao', $valor, $statusPagamento, '$codMoip', $formaPagamento, '$tipoPagamento', '$emailConsumidor')";
+
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+	}
 }
+	
+	
+

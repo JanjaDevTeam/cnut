@@ -54,6 +54,43 @@ CREATE TABLE projeto (
 	FOREIGN KEY (idCategoria) REFERENCES categoria(id) ON DELETE RESTRICT
 )ENGINE=InnoDB;
 
+
+CREATE TABLE colaboracao (
+	id INT NOT NULL AUTO_INCREMENT,
+	idProjeto INT NOT NULL,
+	valor DECIMAL(10,2) NOT NULL,
+	descricao TEXT NOT NULL,
+	qtdTotal INT NOT NULL,
+	qtdComprada INT NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (idProjeto) REFERENCES projeto(id) ON DELETE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE user_colaboracao (
+	id INT NOT NULL AUTO_INCREMENT,
+	idUser INT NOT NULL,
+	idColaboracao INT NOT NULL,
+	seed CHAR(32) NOT NULL,
+	dataRegistro TIMESTAMP NOT NULL DEFAULT NOW(),
+	statusMoip INT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (idUser) REFERENCES user(id) ON DELETE RESTRICT,
+	FOREIGN KEY (idColaboracao) REFERENCES colaboracao(id) ON DELETE RESTRICT
+)ENGINE=InnoDB;
+
+# moip
+CREATE TABLE moip_nasp (
+	id INT NOT NULL AUTO_INCREMENT,
+	idTransacao VARCHAR(32) NOT NULL,
+	valor INTEGER NOT NULL,
+	statusPagamento INTEGER NOT NULL,
+	codMoip CHAR(32) NOT NULL,
+	formaPagamento INTEGER NOT NULL,
+	tipoPagamento VARCHAR(32) NOT NULL,
+	emailConsumidor VARCHAR(45) NOT NULL,
+	PRIMARY KEY(id)
+)ENGINE=InnoDB;
+
 # INSERTS
 
 INSERT INTO categoria (categoria) VALUES ('agricultura sustentável');
