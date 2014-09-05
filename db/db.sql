@@ -91,6 +91,12 @@ CREATE TABLE moip_nasp (
 	PRIMARY KEY(id)
 )ENGINE=InnoDB;
 
+CREATE TABLE vip (
+	id INT NOT NULL AUTO_INCREMENT,
+	fbemail CHAR(64) NOT NULL,
+	PRIMARY KEY(id)
+)ENGINE=MyISAM;
+
 # INSERTS
 
 INSERT INTO categoria (categoria) VALUES ('agricultura sustentável');

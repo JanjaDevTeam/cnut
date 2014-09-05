@@ -35,7 +35,7 @@ if (isset($_POST['nome'])) {
 	$db = new Database;
 	$template['categorias'] = $db->getCategorias();
 	$template['page'] = 'projeto/form_projeto';
-	require_once('template/main.php');	
+	require_once('template/editor.php');	
 }
 
 

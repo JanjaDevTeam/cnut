@@ -176,6 +176,31 @@ class Database extends PDO {
 	}
 	
 	#### PROJETOS
+	public function toggleAnalise($proj) {
+		$analise = ($proj->getAnalise() == 0) ? 1 : 0;
+		$id = $proj->getId();
+		$sql = "UPDATE projeto set analise = $analise WHERE id = $id";
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+
+		$proj->setAnalise($analise);
+
+		return $proj;
+		
+	}
+
+	public function toggleAtivo($proj) {
+		$ativo = ($proj->getAtivo() == 0) ? 1 : 0;
+		$id = $proj->getId();
+		$sql = "UPDATE projeto set ativo = $ativo WHERE id = $id";
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+
+		$proj->setAtivo($ativo);
+
+		return $proj;
+		
+	}
 	
 	public function getCategorias() {
 		$sql = "SELECT id, categoria FROM categoria";
@@ -444,6 +469,55 @@ class Database extends PDO {
 
 		$stmt = $this->prepare($sql);
 		$result = $stmt->execute();
+	}
+	
+	
+	#### ADMIN
+	public function getVipList() {
+		$sql = "SELECT email FROM vip";
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$vip = array();
+		foreach ($result as $v) {
+			$vip[] = $v['email'];
+		}
+
+		return $vip;
+	}
+	
+	public function getAbertosList() {
+		$sql = 'SELECT projeto.id as id, idCategoria, categoria, nome 
+		FROM projeto, categoria 
+		WHERE analise = 1 AND projeto.idCategoria = categoria.id';
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		return $result;
+	}
+
+	public function getAtivosList() {
+		$sql = 'SELECT projeto.id as id, idCategoria, categoria, nome 
+		FROM projeto, categoria 
+		WHERE ativo = 1 AND projeto.idCategoria = categoria.id';
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		return $result;
+	}
+
+	public function getOwnerInfo($idProjeto) {
+		$sql = 'SELECT user.nome as nome, email FROM user, projeto 
+		WHERE projeto.idUser = user.id AND projeto.id = ' . $idProjeto;
+
+		$stmt = $this->prepare($sql);
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		return $result[0];
 	}
 }
 	

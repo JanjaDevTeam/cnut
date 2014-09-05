@@ -88,10 +88,10 @@ hr {
     height: 100%;
 }
 
-.quadroProjeto h1, 
-.quadroProjeto h2, 
-.quadroProjeto h3, 
-.quadroProjeto h4{
+#quadroProjeto h1, 
+#quadroProjeto h2, 
+#quadroProjeto h3, 
+#quadroProjeto h4{
 	margin-top: 0;
 	padding: 0;
 }

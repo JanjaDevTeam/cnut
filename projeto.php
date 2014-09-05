@@ -25,7 +25,34 @@ $template['proponente']    = $proj['proponente'];
 $template['frase']         = $proj['projeto']->getFrase();
 $template['descricao']     = $proj['projeto']->getDescricao();
 $template['apoio']         = $proj['projeto']->getColaboracao();
+$template['idProjeto']     = $proj['projeto']->getId();
+$template['analise']       = $proj['projeto']->getAnalise();
+$template['ativo']         = $proj['projeto']->getAtivo();
 $template['page']          = "projeto/projeto";
+
+// verifica se é o dono
+if (isset($_SESSION['id'])) {
+	if($_SESSION['id'] = $proj['idProponente']) {
+		$template['session'] = 'owner';
+	}
+	
+	// mensage
+	if($template['ativo'] == 0 && $template['analise'] == 0) {
+		$template['msg'] = "Envie seu projeto para análise.";
+	}
+	
+	// verifica se tem colaboração
+	$colab = $proj['projeto']->getColaboracao();
+	if(sizeof($colab) == 0) {
+		$template['bloqueado'] = 1;
+		$template['msg'] = "Antes de enviar para análise o projeto, defina os valores de apoio.";
+	}
+} else {
+	// não é dono e não está ativo, redireciona pra index
+	if($template['ativo'] == 0) {
+		header('location: index.php');
+	}
+}
 
 require_once('template/main.php');
 
