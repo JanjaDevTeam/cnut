@@ -24,7 +24,6 @@ if (isset($_POST['email'])) {
 	$user->setSenha($_POST['senha']);
 	
 	$logar = $controller->loginForm($user);
-	Janja::Debug($logar);
 	if ($logar == true) {
 		header('location: index.php');
 	} else {

@@ -32,6 +32,33 @@ class Database extends PDO {
 		}
 	}
 
+	public function select($sql) {
+        try {
+            $stmt = $this->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+            exit;
+            return false;
+            
+        }
+    }
+    
+    public function execute($sql) {
+        try {
+            $stmt = $this->prepare($sql);
+            $result = $stmt->execute();
+            return $result;
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+            exit;
+            return false;
+            
+        }
+    }
+
 
 	#### USER
 	public function saveUser($user) {
@@ -150,10 +177,8 @@ class Database extends PDO {
 		$senha = $user->getSenha();
 		$sql = "SELECT id FROM user WHERE email = '$email' AND senha = '$senha'";
 		
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
+		$result = $this->select($sql);
+
 		if (sizeof($result) == 0) {
 			return false;
 		} else if(sizeof($result) == 1) {
