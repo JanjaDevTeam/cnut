@@ -28,7 +28,7 @@ class ControllerProjeto {
 		$exp = explode('?v=', $proj->getVideo());
 		$videoId = explode("&", $exp[1]);
 		$data['videoId'] = $videoId[0];
-		
+		$data['coverArt'] = $proj->getImage();
 		$data['backers'] = $backers;
 		$data['projeto'] = $proj;
 		$data['diasRestantes'] = $proj->getDiasRestantes();
@@ -37,6 +37,11 @@ class ControllerProjeto {
 		$data['pct'] = $proj->getPorcentagem();
 		$data['categoria'] = $proj->getCategoria();
 		$data['prazo'] = $proj->getPrazo();
+		$data['nome'] = $proj->getNome();
+		$data['frase'] = $proj->getFrase();
+		$data['valor'] = $proj->getValor();
+		$data['valorArrecadado'] = $proj->getValorArrecadado();
+		$data['id'] = $proj->getId();
 
 		// foto
 		$fotoPath = "img/userpics/" . $user->getId() . ".jpg";
@@ -48,6 +53,20 @@ class ControllerProjeto {
 		
 		
 		return $data;
+	}
+
+	public function getProjetos() {
+		$db = new Database;
+		$proj_array = array();
+		$projetos = $db->getProjetos();
+
+		foreach($projetos as $proj) {
+			$id = $proj['id'];
+			$projeto = $this->getProjetoCompleto($id);
+			$proj_array[] = $projeto;
+		}
+
+		return $proj_array;
 	}
 
 	public function validarProjeto($proj) {

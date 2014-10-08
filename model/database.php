@@ -75,16 +75,14 @@ class Database extends PDO {
 		if ($id == null) {
 			$sql = "INSERT INTO user (nome, email, senha, fbId, dataRegistro, dataAcesso, ativo) 
 			VALUES ('$nome', '$email', '$senha', '$fbId', '$dataRegistro', '$dataAcesso', $ativo)";
-			$stmt = $this->prepare($sql);
-			$result = $stmt->execute();
+			$result = $this->execute($sql);
 			$id = $this->lastInsertId();
 			$user->setId($id);
 		} else {
 			$sql = "UPDATE user SET nome='$nome', email='$email', fbId='$fbId', 
 			dataRegistro='$dataRegistro', dataAcesso='$dataAcesso', ativo=$ativo   
 			WHERE id = " . $id;
-			$stmt = $this->prepare($sql);
-			$result = $stmt->execute();
+			$result = $stmt->execute($sql);
 		}
 		return $user;
 	}
@@ -92,8 +90,7 @@ class Database extends PDO {
 	public function saveToken($idUser, $dataRegistro, $token, $motivo) {
 		$sql = "INSERT INTO token (idUser, dataRegistro, token, motivo) 
 		VALUES ($idUser, '$dataRegistro', '$token', '$motivo')";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
 
 		return true;
 	}
@@ -101,9 +98,8 @@ class Database extends PDO {
 	public function getUserById($id) {
 		$sql = "SELECT nome, email, senha, fbId, dataRegistro, dataAcesso, ativo FROM user 
 		WHERE id = " . $id;
-		$stmt = $this->prepare($sql);
-		$stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$result = $this->select($sql);
 		
 		$user = new User;
 		$user->setId($id);
@@ -121,9 +117,7 @@ class Database extends PDO {
 	}
 	public function getUserByEmail($email) {
 		$sql = "SELECT id FROM user WHERE email = '$email'";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 		
 		if (sizeof($result) > 0) {
 			$id = $result[0]['id'];
@@ -175,7 +169,7 @@ class Database extends PDO {
 	public function logar($user) {
 		$email = $user->getEmail();
 		$senha = $user->getSenha();
-		$sql = "SELECT id FROM user WHERE email = '$email' AND senha = '$senha'";
+		$sql = "SELECT id FROM user WHERE email = '$email' AND senha = '$senha' AND ativo=1";
 		
 		$result = $this->select($sql);
 
@@ -233,6 +227,12 @@ class Database extends PDO {
 		$result = $stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
+		return $result;
+	}
+
+	public function getProjetos() {
+		$sql = "SELECT id FROM projeto";
+		$result = $this->select($sql);
 		return $result;
 	}
 	

@@ -54,6 +54,7 @@ if (isset($_SESSION['id'])) {
 	}
 }
 
+$template['menu'] = 'explorar';
 require_once('template/main.php');
 
 ?>

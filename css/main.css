@@ -8,6 +8,11 @@ hr {
 	border-color: lightgrey;
 }
 
+.debug {
+	background-color: lightgrey;
+}
+
+
 .topbar {
 	background-color: #28B998;
 	height: 10px;
@@ -121,19 +126,88 @@ hr {
 	margin-bottom: 10px;
 }
 
+.card {
+	background-color: #F7F7F7;
+	#background-color: grey;
+	margin: 0 0 20px 0;
+	padding: 0px;
+}
+
+.card .col-sm-12 {
+	margin: 0px;
+	padding: 0px;
+}
+
+.cardTextoContainer {
+	padding: 10px;
+}
+
+.card img {
+	width: 100%;
+	height: auto;
+}
+
+.cardNome {
+	color: #1E90FF;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: helvetica;
+	text-transform: uppercase;
+	height: 30px;
+	line-height: 30px;
+}
+
+.cardFrase {
+	font-size: 14px;
+	font-family: helvetica;
+	height: 50px;
+}
+
+.cardFinanciado {
+	font-size: 13px;
+}
+
+.barraContainer {
+	width: 100%;
+	height: 10px;
+	margin: 15px auto;
+	background-color: #D0D5CB;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.cardArrecadado {
+	font-size: 14px;
+	text-align: center;
+}
+
+.barra {
+	height: 10px;
+	background-color: #76CC1E;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
 
 @media (min-width: 768px) { 
 	.navbar-default .navbar-nav > li > a {
 		padding: 30px 20px;
 	}
 	.logo {
-		height: 80px;
+		height: 70px;
 	}
 	.userpic img{
 		position: relative;
 		top: -12px;
 	}
 	
+}
+
+@media (min-width: 992px) { 
+	.logo {
+		height: 80px;
+	}	
 }
 
 
