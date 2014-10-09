@@ -42,6 +42,7 @@ class ControllerProjeto {
 		$data['valor'] = $proj->getValor();
 		$data['valorArrecadado'] = $proj->getValorArrecadado();
 		$data['id'] = $proj->getId();
+		$data['categoria'] = $proj->getCategoria();
 
 		// foto
 		$fotoPath = "img/userpics/" . $user->getId() . ".jpg";

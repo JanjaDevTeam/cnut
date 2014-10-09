@@ -12,7 +12,10 @@
 
 				<div class='cardTextoContainer'>
 					<div class='col-sm-12 cardNome'>
-						<?=$proj['nome']?>
+						<h4><?=$proj['nome']?></h4>
+					</div>
+					<div class='col-sm-12 cardCategoria'>
+						<?=$proj['categoria']?>
 					</div>
 
 					<div class='col-sm-12 cardFrase'>

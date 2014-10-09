@@ -41,7 +41,7 @@ hr {
 }
 
 .logo {
-	height: 80px;
+	height: 70px;
 }
 
 .btn-fb {
@@ -147,14 +147,19 @@ hr {
 	height: auto;
 }
 
-.cardNome {
+.cardNome h4{
 	color: #1E90FF;
 	font-size: 14px;
 	font-weight: bold;
 	font-family: helvetica;
 	text-transform: uppercase;
-	height: 30px;
-	line-height: 30px;
+	margin: 10px 0 3px 0;
+}
+
+.cardCategoria {
+	font-size: 13px;
+	font-weight: bold;
+	color: #505050;
 }
 
 .cardFrase {
