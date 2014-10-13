@@ -1,4 +1,8 @@
-<div class="container">
+<?php
+require_once('view/user/perfil_menu.php');
+?>
+
+<div class="row">
 	<div class="col-sm-8 col-sm-offset-2">
 		<div class="row">
 			<?php if (isset($template['foto'])): ?>
@@ -6,8 +10,9 @@
 				<img src="<?=$template['foto']?>" id="target" name='target' class="img-responsive"/>
 			</div>
 			<?php else: ?>
-				
-				<h2>Escolha uma foto!</h2>
+				<br/>
+				<br/>
+				<h2>Escolha uma foto</h2>
 				<br/>
 				<br/>
 			<?php endif; ?>

@@ -20,6 +20,7 @@ $colab = $db->getColabBySeed($data['idTransacao']);
 $idProj = $colab->getIdProjeto();
 $proj = $db->getProjeto($idProj);
 
+//file_put_contents('output.txt', print_r($colab, true));
 
 // atualiza valores do projeto
 if ($data['statusPagamento'] == 4) {  //implementar!

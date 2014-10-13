@@ -82,7 +82,7 @@ class Database extends PDO {
 			$sql = "UPDATE user SET nome='$nome', email='$email', fbId='$fbId', 
 			dataRegistro='$dataRegistro', dataAcesso='$dataAcesso', ativo=$ativo   
 			WHERE id = " . $id;
-			$result = $stmt->execute($sql);
+			$result = $this->execute($sql);
 		}
 		return $user;
 	}
@@ -118,7 +118,6 @@ class Database extends PDO {
 	public function getUserByEmail($email) {
 		$sql = "SELECT id FROM user WHERE email = '$email'";
 		$result = $this->select($sql);
-		
 		if (sizeof($result) > 0) {
 			$id = $result[0]['id'];
 			$user = $this->getUserById($id);
@@ -223,15 +222,30 @@ class Database extends PDO {
 	
 	public function getCategorias() {
 		$sql = "SELECT id, categoria FROM categoria";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 		
 		return $result;
 	}
 
-	public function getProjetos() {
-		$sql = "SELECT id FROM projeto";
+	public function getCategoria($id) {
+		$sql = "SELECT id, categoria FROM categoria WHERE id = " . $id;
+		$result = $this->select($sql);
+		
+		return $result;
+	}
+
+	public function getProjetos($idCat=null, $ativo = null) {
+		if ($idCat != null) {
+			$sql = "SELECT id FROM projeto WHERE idCategoria = " . $idCat;
+			if ($ativo !== null) {
+				$sql .= " AND ativo = " . $ativo;
+			}
+		} else {
+			$sql = "SELECT id FROM projeto";
+			if ($ativo !== null) {
+				$sql .= " WHERE ativo = " . $ativo;
+			}
+		}
 		$result = $this->select($sql);
 		return $result;
 	}
@@ -282,8 +296,6 @@ class Database extends PDO {
 		$links       = addslashes($projeto->getLinks());
 		$ativo       = $projeto->getAtivo();
 		$analise     = $projeto->getAnalise();
-		
-		Janja::Debug($projeto);
 
 
 		if ($id == null) {
@@ -292,7 +304,6 @@ class Database extends PDO {
 			$sql = "INSERT INTO projeto 
 			(idUser, idCategoria, nome, descricao, frase, valor, valorArrecadado, prazo, video, links, ativo, analise) 
 			VALUES ($idUser, $idCategoria, '$nome', '$descricao', '$frase', $valor, $valorArrecadado,  $prazo, '$video', '$links', $ativo, $analise)";
-			print "<br/><br/>$sql<br/><br/>";
 			$stmt = $this->prepare($sql);
 			$result = $stmt->execute();
 			$projeto->setId($this->lastInsertId());
@@ -310,6 +321,8 @@ class Database extends PDO {
 			valor=$valor, valorArrecadado = $valorArrecadado, prazo='$prazo', video='$video', 
 			links='$links', ativo=$ativo, analise=$analise  
 			WHERE id = $id";
+
+			file_put_contents('output.txt', print_r($sql, true));
 
 			$stmt = $this->prepare($sql);
 			$result = $stmt->execute();
@@ -453,7 +466,6 @@ class Database extends PDO {
 
 	function updateUserColaboracaoBySeed($seed, $statusPagamento) {
 		$sql = "UPDATE user_colaboracao SET statusMoip=$statusPagamento WHERE seed='$seed'";
-		print $sql;
 		$stmt = $this->prepare($sql);
 		$result = $stmt->execute();
 
@@ -543,6 +555,20 @@ class Database extends PDO {
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		return $result[0];
+	}
+
+
+	######## PERFIL ##########
+
+	public function getProjetosApoiados($idUser) {
+		$sql = "select distinct projeto.id as id from user, projeto, 
+		user_colaboracao, colaboracao where user_colaboracao.idUser = user.id 
+		AND user_colaboracao.idColaboracao = colaboracao.id AND colaboracao.idProjeto = projeto.id 
+		AND user.id = " . $idUser;
+
+		$result = $this->select($sql);
+
+		return $result;
 	}
 }
 	

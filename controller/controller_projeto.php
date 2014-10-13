@@ -56,10 +56,24 @@ class ControllerProjeto {
 		return $data;
 	}
 
-	public function getProjetos() {
+	public function getProjetos($idCat = null, $ativo = null) {
 		$db = new Database;
 		$proj_array = array();
-		$projetos = $db->getProjetos();
+		$projetos = $db->getProjetos($idCat, $ativo);
+
+		foreach($projetos as $proj) {
+			$id = $proj['id'];
+			$projeto = $this->getProjetoCompleto($id);
+			$proj_array[] = $projeto;
+		}
+
+		return $proj_array;
+	}
+
+	public function getProjetosApoiados($id) {
+		$db = new Database;
+		$proj_array = array();
+		$projetos = $db->getProjetosApoiados($id);
 
 		foreach($projetos as $proj) {
 			$id = $proj['id'];

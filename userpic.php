@@ -11,7 +11,7 @@ if(isset($_FILES['upfile'])) {
 	$template['foto'] = $foto;
 }
 
-
+$template['menuPerfil'] = 0;
 $template['page'] = 'user/userpic';
 require_once('template/crop.php');
 

@@ -70,5 +70,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script>
+				$(function(){
+				  // bind change event to select
+				  $('#dynamic_select').bind('change', function () {
+					  var url = $(this).val(); // get selected value
+					  if (url) { // require a URL
+						  window.location = url; // redirect
+					  }
+					  return false;
+				  });
+				});
+			</script>
   </body>
 </html>

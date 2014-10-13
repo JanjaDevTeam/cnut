@@ -14,7 +14,7 @@ class ControllerLogin {
 			$user->setDataAcesso($user->getNow());
 			$user = $db->saveUser($user);
 			// copia foto do fb para pasta img/userpics
-			$url = "https://graph.facebook.com/" .  $fbid . "/picture?type=square";
+			$url = "https://graph.facebook.com/" .  $fbid . "/picture?width=150&height=150";
 			$img = "img/userpics/" . $user->getId() . "-fb.jpg";
 			copy($url, $img);
 			

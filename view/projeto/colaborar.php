@@ -9,3 +9,5 @@
 	<input type="hidden" name="id" value="<?=$template['id']?>"/>
 	<input type="submit" class="btn btn-success" value="Colaborar"/>
 </form>
+<br/>
+<button class='btn btn-primary' onclick='window.history.back()'>Voltar</button>

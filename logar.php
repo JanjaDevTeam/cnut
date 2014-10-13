@@ -5,7 +5,6 @@ require_once('controller/controller_login.php');
 require_once('lib/fbconfig.php');
 require_once('lib/janja.php');
 
-
 // caso receba code, loga pelo fb
 if(isset($_GET['code'])) {
 	require_once('lib/fbconfig.php');

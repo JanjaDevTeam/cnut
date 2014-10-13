@@ -4,7 +4,7 @@ require_once('model/database.php');
 require_once('model/projeto.php');
 require_once('model/colaboracao.php');
 
-Janja::Debug($_POST);
+//Janja::Debug($_POST);
 
 // caso venha do formulário
 if(isset($_POST['valor'])) {

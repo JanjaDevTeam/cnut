@@ -10,12 +10,22 @@ if (isset($_SESSION['id'])) {
 	}
 }
 
-$ct = new ControllerProjeto;
-$template['projetos'] = $ct->getProjetos();
+$db = new Database;
+$template['categorias'] = $db->getCategorias();
 
-$template['projetos'][0]['pct'] = 35;
-$template['projetos'][1]['pct'] = 85;
-$template['projetos'][2]['pct'] = 10;
+$ct = new ControllerProjeto;
+if(isset($_GET['idCat'])) {
+	$categoria = $db->getCategoria($_GET['idCat']);
+	$template['idCat'] = $_GET['idCat'];
+	$template['categoria'] = $categoria[0]['categoria'];
+	$template['projetos'] = $ct->getProjetos($_GET['idCat'], 1);
+} else {
+	$template['projetos'] = $ct->getProjetos(null, 1);
+}
+
+
+
+
 
 
 

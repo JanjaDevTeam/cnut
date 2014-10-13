@@ -35,5 +35,5 @@ session_start();
 
 header('Content-type: image/jpeg');
 imagejpeg($dst_r, 'img/userpics/' . $_SESSION['id'] . '.jpg', $jpeg_quality);
-header('location: index.php');
+header('location: perfil.php');
 ?>

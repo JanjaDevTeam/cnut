@@ -11,6 +11,18 @@ class Janja {
 		var_dump($target);
 		echo "</pre>";
 	}
+
+	static function foto() {
+		$sufixo  = isset($_SESSION['fbId']) ? '-fb.jpg' : '.jpg';
+		$userpic = 'img/userpics/' . $_SESSION['id'] . $sufixo;
+	
+		if(!isset($_SESSION['fbId']) && !file_exists($userpic)) {
+			$userpic = "img/user-default.jpg";
+		}
+
+		return $userpic . '?' . (string)(date('H-i-s'));
+
+	}
 	
 	
 	static function menuAdmin($selecionado=0) {

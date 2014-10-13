@@ -26,22 +26,22 @@
 
 <div class="col-sm-6 col-lg-4">
 	<h2>Nova colaboração</h2>
-	<form id="cadastro" method="post" action="colaboracao.php">
+	<form name="formColaboracao" method="post" action="colaboracao.php" onsubmit="return validaFormColaboracao()">
 		<div class="form-group">
 			<label for="inputValor">Valor (em R$ sem vírgula ou ponto)</label>
-			<input name="valor" type="text" class="form-control" id="inputValor" required>
+			<input name="valor" type="text" class="form-control" id="inputValor">
 		</div>
 		
 		<div class="form-group">
 			<label for="inputDescricao">Descrição</label>
-			<textarea name="descricao" id="inputDescricao" class="form-control" required></textarea>
+			<textarea name="descricao" id="inputDescricao" class="form-control"></textarea>
 		</div>
 		
 		<div class="form-group">
 			<label for="inputQtd">Quantidade (0 para ilimitada)</label>
-			<input name="quantidade" type="text" class="form-control" id="inputQtd" required>
+			<input name="quantidade" type="text" class="form-control" id="inputQtd">
 		</div>
-		<input name="idProjeto" type="hidden" value="<?=$template['idProjeto']?>" required>
+		<input name="idProjeto" type="hidden" value="<?=$template['idProjeto']?>">
 		<button type="submit" class="btn btn-success pull-right">Registrar</button>
 		<br/>
 		<br/>

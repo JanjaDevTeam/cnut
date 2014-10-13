@@ -1,0 +1,6 @@
+UPDATE projeto SET 
+			idCategoria = 1, nome ='Play With Me!', descricao='<p>Do youuuuuuuu wannaaaaaaaa plaaaaaaaaay</p>
+<p>Play with me!</p>', frase='Frase impactante!', 
+			valor=30000.00, valorArrecadado = 900, prazo='45', video='https://www.youtube.com/watch?v=DOP63wHJEvw', 
+			links='http://janjadev.com', ativo=1, analise=0  
+			WHERE id = 5

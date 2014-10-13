@@ -11,7 +11,6 @@ $ct = new ControllerProjeto;
 $id = $_GET['id'];
 
 $proj = $ct->getProjetoCompleto($id);
-//Janja::Debug($proj);
 
 
 $template['nome']          = $proj['projeto']->getNome();
@@ -32,11 +31,11 @@ $template['page']          = "projeto/projeto";
 
 // verifica se é o dono
 if (isset($_SESSION['id'])) {
-	if($_SESSION['id'] = $proj['idProponente']) {
+	if($_SESSION['id'] == $proj['idProponente']) {
 		$template['session'] = 'owner';
 	}
 	
-	// mensage
+	// mensagem
 	if($template['ativo'] == 0 && $template['analise'] == 0) {
 		$template['msg'] = "Envie seu projeto para análise.";
 	}
@@ -53,6 +52,7 @@ if (isset($_SESSION['id'])) {
 		header('location: index.php');
 	}
 }
+
 
 $template['menu'] = 'explorar';
 require_once('template/main.php');
