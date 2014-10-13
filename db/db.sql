@@ -47,6 +47,7 @@ CREATE TABLE projeto (
 	video VARCHAR(256) NOT NULL,
 	links VARCHAR(256) NULL,
 	dataRegistro TIMESTAMP NOT NULL DEFAULT NOW(),
+	dataAtivacao TIMESTAMP NULL,
 	ativo INT(1) NOT NULL,
 	analise INT(1) NOT NULL,
 	PRIMARY KEY (id),
@@ -93,7 +94,7 @@ CREATE TABLE moip_nasp (
 
 CREATE TABLE vip (
 	id INT NOT NULL AUTO_INCREMENT,
-	fbemail CHAR(64) NOT NULL,
+	email CHAR(64) NOT NULL,
 	PRIMARY KEY(id)
 )ENGINE=MyISAM;
 

@@ -1,6 +1,15 @@
 UPDATE projeto SET 
-			idCategoria = 1, nome ='Play With Me!', descricao='<p>Do youuuuuuuu wannaaaaaaaa plaaaaaaaaay</p>
-<p>Play with me!</p>', frase='Frase impactante!', 
-			valor=30000.00, valorArrecadado = 900, prazo='45', video='https://www.youtube.com/watch?v=DOP63wHJEvw', 
+			idCategoria = 8, nome ='Game Boy Reloaded', descricao='<p><strong>Exemplo de c&oacute;digo da Janja</strong></p>
+<p><code>public function validarProjeto($proj) {<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; $erros = array();<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // verifica campos em branco<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if($proj-&gt;getNome() == \"\") { $erros[] = \"nome\"; }<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if($proj-&gt;getIdCategoria() == \"\") {$erros[] = \"categoria\";}<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if($proj-&gt;getDescricao()==\"\") {$erros[] = \"descri&ccedil;&atilde;o\";}<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if($proj-&gt;getFrase()==\"\") {$erros[] = \"frase\";}<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if($proj-&gt;getValor()==\"\") { $erros[] = \"valor\";}<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if($proj-&gt;getPrazo()==\"\") {$erros[] = \"prazo\";}<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if($proj-&gt;getVideo()==\"\") {$erros[] = \"video\";}<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if($proj-&gt;getLinks()==\"\") {$erros[] = \"links\";}<br /><br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return (sizeof($erros) == 0) ? True : $erros; <br />&nbsp;&nbsp;&nbsp; }</code></p>
+<p>&nbsp;</p>
+<blockquote>
+<p>Cita&ccedil;&atilde;o</p>
+<p>Mais vale grana na m&atilde;o da Janja que voando.</p>
+<p>&nbsp;</p>
+</blockquote>
+<p>A <strong>Sega</strong> <span style=\"font-weight: normal;\">(<span class=\"t_nihongo_kanji\" lang=\"ja\"><a title=\"L&iacute;ngua japonesa\" href=\"http://pt.wikipedia.org/wiki/L%C3%ADngua_japonesa\">Japon&ecirc;s</a>: 株式会社セガ</span><span class=\"t_nihongo_comma\">,</span> <em><span class=\"t_nihongo_romaji\"><a title=\"Sistema Hepburn\" href=\"http://pt.wikipedia.org/wiki/Sistema_Hepburn\">Hepburn</a>: Kabushiki-kaisha</span></em><span class=\"t_nihongo_help\"><sup><a title=\"Ajuda:Japon&ecirc;s\" href=\"http://pt.wikipedia.org/wiki/Ajuda:Japon%C3%AAs\"><span class=\"t_nihongo_icon\" style=\"color: #00e; font: bold 80% sans-serif; text-decoration: none; padding: 0 .1em;\">?</span></a></sup></span>)</span> &eacute; uma empresa desenvolvedora de <a title=\"Software\" href=\"http://pt.wikipedia.org/wiki/Software\">software</a> para <a class=\"mw-redirect\" title=\"Videogame\" href=\"http://pt.wikipedia.org/wiki/Videogame\">Video games</a>, e uma antiga produtora de <a class=\"mw-redirect\" title=\"Consoles de videogame\" href=\"http://pt.wikipedia.org/wiki/Consoles_de_videogame\">consoles</a>. A companhia tem tido sucesso tanto no mercado de <a title=\"Arcade\" href=\"http://pt.wikipedia.org/wiki/Arcade\">arcades</a> quanto no de consoles caseiros, apesar de estar fora desse &uacute;ltimo setor desde 2001.</p>
+<p>&nbsp;</p>
+<h1 style=\"text-align: center;\">Presented by Janja</h1>', frase='Ma oooooooe', 
+			valor=1500.00, valorArrecadado = 840, prazo='60', video='https://www.youtube.com/watch?v=d9KrlGChPy8', 
 			links='http://janjadev.com', ativo=1, analise=0  
-			WHERE id = 5
+			WHERE id = 4

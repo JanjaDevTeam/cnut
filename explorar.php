@@ -20,16 +20,10 @@ if(isset($_GET['idCat'])) {
 	$template['categoria'] = $categoria[0]['categoria'];
 	$template['projetos'] = $ct->getProjetos($_GET['idCat'], 1);
 } else {
+	$template['idCat'] = 0;
 	$template['projetos'] = $ct->getProjetos(null, 1);
 }
 
-
-
-
-
-
-
-//Janja::Debug($template['projetos'][0]);
 
 
 $template['menu'] = 'explorar';

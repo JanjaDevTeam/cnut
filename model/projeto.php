@@ -14,6 +14,7 @@ class Projeto {
 	private $video;
 	private $links;
 	private $dataRegistro;
+	private $dataAtivacao;
 	private $ativo;
 	private $analise;
 	private $colaboracao;
@@ -62,6 +63,9 @@ class Projeto {
 	}
 	public function setDataRegistro($data) {
 		$this->dataRegistro = $data;
+	}
+	public function setDataAtivacao($data) {
+		$this->dataAtivacao = $data;
 	}
 	public function setAtivo($ativo) {
 		$this->ativo = $ativo;
@@ -120,6 +124,9 @@ class Projeto {
 	public function getDataRegistro() {
 		return $this->dataRegistro;
 	}
+	public function getDataAtivacao() {
+		return $this->dataAtivacao;
+	}
 	public function getAtivo() {
 		return $this->ativo;
 	}
@@ -151,18 +158,22 @@ class Projeto {
 	}
 	
 	public function getDiasRestantes () {
-		$agora = date("Y-m-d H:i:s");
-		$segundosPassados = strtotime($agora) - strtotime($this->getDataRegistro());
-		$diasPassados = $segundosPassados / 86400;
-		$prazo = $this->getPrazo();
-		$diasRestantes = floor($prazo - $diasPassados) + 1;
+		if ($this->dataAtivacao !== null) {
+			$agora = date("Y-m-d H:i:s");
+			$segundosPassados = strtotime($agora) - strtotime($this->getDataAtivacao());
+			$diasPassados = $segundosPassados / 86400;
+			$prazo = $this->getPrazo();
+			$diasRestantes = floor($prazo - $diasPassados) + 1;
 
-		//correção pra hora do cadastro;
-		if ($agora == $this->getDataRegistro()) {
-			$diasRestantes -= 1;
+			//correção pra hora do cadastro;
+			if ($agora == $this->getDataRegistro()) {
+				$diasRestantes -= 1;
+			}
+		} else {
+			$diasRestantes = 'x';
 		}
-		
-		return $diasRestantes;
+			
+			return $diasRestantes;
 	}
 
 

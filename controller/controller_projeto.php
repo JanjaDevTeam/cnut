@@ -84,6 +84,20 @@ class ControllerProjeto {
 		return $proj_array;
 	}
 
+	public function getProjetosByOwner($id) {
+		$db = new Database;
+		$proj_array = array();
+		$projetos = $db->getProjetosByOwner($id);
+
+		foreach($projetos as $proj) {
+			$id = $proj['id'];
+			$projeto = $this->getProjetoCompleto($id);
+			$proj_array[] = $projeto;
+		}
+
+		return $proj_array;
+	}
+
 	public function validarProjeto($proj) {
 		$erros = array();
 		// verifica campos em branco

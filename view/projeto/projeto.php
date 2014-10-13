@@ -41,12 +41,21 @@
 	</div>
 	<div class="col-sm-4">
 		<h1><?=$template['backers']?></h1><h4> participantes</h4>
-		<h1><?=$template['arrecadado']?></h1><h4> de <?=$template['total']?></h4>
+		<h1>R$ <?=$template['arrecadado']?></h1><h4> de R$ <?=$template['total']?></h4>
 		<h1><?=$template['diasRestantes']?></h1><h4>dias restantes</h4>
+
+		<div class=''>
+			<br/>
+			<p><?=$template['pct']?> % arrecadado</p>
+			<div class='barraContainer'>
+				<?php 
+				$barra = ($proj['pct'] > 100)? 100 : $proj['pct'];
+				?>
+				<div class='barra' style='width: <?=$barra?>%'></div>
+			</div>
+		</div>
 		
-		<br/>
-		<button class="btn btn-success apoiarBtn">Apoiar</button>
-		<br/>
+		
 		
 		<div class="quadroProponente">
 			<div class="">

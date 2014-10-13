@@ -27,6 +27,7 @@ $template['apoio']         = $proj['projeto']->getColaboracao();
 $template['idProjeto']     = $proj['projeto']->getId();
 $template['analise']       = $proj['projeto']->getAnalise();
 $template['ativo']         = $proj['projeto']->getAtivo();
+$template['pct']           = $proj['projeto']->getPorcentagem();
 $template['page']          = "projeto/projeto";
 
 // verifica se é o dono

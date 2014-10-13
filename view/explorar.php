@@ -64,7 +64,11 @@
 
 			<div class='cardTextoContainer'>
 				<div class='col-sm-12 cardNome'>
-					<h4><?=$proj['nome']?></h4>
+					<h4>
+						<?php if($proj['pct'] >= 100): ?>
+						<img src='img/medal.png' class='medal' style="width: 16px;"/>
+						<?php endif; ?><?=$proj['nome']?>
+					</h4>
 				</div>
 				<div class='col-sm-12 cardCategoria'>
 					<?=$proj['categoria']?>

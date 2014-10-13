@@ -211,8 +211,13 @@ class Database extends PDO {
 		$ativo = ($proj->getAtivo() == 0) ? 1 : 0;
 		$id = $proj->getId();
 		$sql = "UPDATE projeto set ativo = $ativo WHERE id = $id";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
+
+		// caso null, dataAtivacao
+		if($proj->getDataAtivacao() == null) {
+			$sql = "UPDATE projeto SET dataAtivacao=NOW() WHERE id = $id";
+			$result = $this->execute($sql);
+		}
 
 		$proj->setAtivo($ativo);
 
@@ -253,7 +258,7 @@ class Database extends PDO {
 	public function getProjeto($id) {
 
 		// implementar
-		$sql = 'SELECT idUser, idCategoria, nome, descricao, frase, valor, valorArrecadado, prazo, video, links, ativo, analise, dataRegistro, categoria 
+		$sql = 'SELECT idUser, idCategoria, nome, descricao, frase, valor, valorArrecadado, prazo, video, links, ativo, analise, dataRegistro, dataAtivacao, categoria 
 		FROM projeto, categoria WHERE projeto.idCategoria = categoria.id AND projeto.id = ' . $id;
 		$stmt = $this->prepare($sql);
 		$result = $stmt->execute();
@@ -274,8 +279,10 @@ class Database extends PDO {
 		$projeto->setVideo(stripslashes($result[0]['video']));
 		$projeto->setLinks(stripslashes($result[0]['links']));
 		$projeto->setDataRegistro($result[0]['dataRegistro']);
+		$projeto->setDataAtivacao($result[0]['dataAtivacao']);
 		$projeto->setAtivo($result[0]['ativo']);
 		$projeto->setAnalise($result[0]['analise']);
+
 
 		return $projeto;
 
@@ -319,10 +326,8 @@ class Database extends PDO {
 			$sql = "UPDATE projeto SET 
 			idCategoria = $idCategoria, nome ='$nome', descricao='$descricao', frase='$frase', 
 			valor=$valor, valorArrecadado = $valorArrecadado, prazo='$prazo', video='$video', 
-			links='$links', ativo=$ativo, analise=$analise  
+			links='$links', ativo=$ativo, analise=$analise   
 			WHERE id = $id";
-
-			file_put_contents('output.txt', print_r($sql, true));
 
 			$stmt = $this->prepare($sql);
 			$result = $stmt->execute();
@@ -565,6 +570,14 @@ class Database extends PDO {
 		user_colaboracao, colaboracao where user_colaboracao.idUser = user.id 
 		AND user_colaboracao.idColaboracao = colaboracao.id AND colaboracao.idProjeto = projeto.id 
 		AND user.id = " . $idUser;
+
+		$result = $this->select($sql);
+
+		return $result;
+	}
+
+	public function getProjetosByOwner($idUser) {
+		$sql = "select id from projeto where idUser = " . $idUser;
 
 		$result = $this->select($sql);
 
