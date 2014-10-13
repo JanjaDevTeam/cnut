@@ -37,7 +37,8 @@
 			<?php if (isset($template['image'])): ?>
 				<br/><img src="<?=$template['image']?>"/>
 			<?php endif; ?>
-			<p>Ex: https://www.youtube.com/watch?v=rFOl-9SNxLY</p>
+			<p>Ex: https://www.youtube.com/watch?v=<strong>rFOl-9SNxLY</strong></p>
+			<p>Coloque somente o código do video, como em negrito no exemplo.</p>
 			<input name="video" type="text" class="form-control" id="inputVideo" value="<?=$template['video']?>" />
 		</div>
 		<div class="form-group">

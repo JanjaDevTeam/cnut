@@ -33,7 +33,8 @@
 		</div>
 		<div class="form-group">
 			<label for="inputVideo">Video do youtube</label>
-			<p>Ex: https://www.youtube.com/watch?v=rFOl-9SNxLY</p>
+			<p>Ex: https://www.youtube.com/watch?v=<strong>rFOl-9SNxLY</strong></p>
+			<p>Coloque somente o código do video, como em negrito no exemplo.</p>
 			<input name="video" type="text" class="form-control" id="inputVideo" >
 		</div>
 		<div class="form-group">

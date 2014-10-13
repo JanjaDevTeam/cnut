@@ -22,9 +22,7 @@ class ControllerProjeto {
 		$proj->setColaboracao($colaboracao);
 		
 		// id do video para embed
-		$exp = explode('?v=', $proj->getVideo());
-		$videoId = explode("&", $exp[1]);
-		$data['videoId'] = $videoId[0];
+		$data['videoId'] = $proj->getVideo();
 		$data['coverArt'] = $proj->getImage();
 		$data['backers'] = $backers;
 		$data['projeto'] = $proj;

@@ -28,7 +28,8 @@ class Database extends PDO {
 			parent::__construct($config['db_type'].':host='.$config['db_host'].';dbname='.$config['db_name'],$config['db_username'],$config['db_password'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 			$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch(PDOException $e){				
-				die('ERROR: '. $e->getMessage());
+				//die('ERROR: '. $e->getMessage());
+			header('location: erro.php');
 		}
 	}
 
@@ -129,9 +130,7 @@ class Database extends PDO {
 	public function getTokenByToken($token) {
 		$sql = "SELECT idUser, dataRegistro, token, motivo 
 		FROM token where token='$token'";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 
 		return $result;
 	}
@@ -139,25 +138,21 @@ class Database extends PDO {
 	public function verificarToken($idUser, $motivo) {
 		$sql = 'SELECT COUNT(id) as total FROM token WHERE idUser = ' . $idUser . 
 		' AND motivo = \'' . $motivo . '\' AND dataRegistro > (NOW() - INTERVAL 1 DAY)';
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 		
 		return $result['0']['total'];
 	}
 	
 	public function deleteOldTokens() {
 		$sql = "delete from token where dataRegistro < (NOW() - INTERVAL 1 DAY)";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
 		
 		return true;
 	}
 	
 	public function deleteToken($token) {
 		$sql = "DELETE FROM token WHERE token = '$token'";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
 		
 		return true;
 	}
@@ -186,8 +181,7 @@ class Database extends PDO {
 		$sql = "UPDATE user SET senha = '" . $user->getSenha() . "' 
 		WHERE id = " . $user->getId();
 		
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
 		
 		return true;
 		
@@ -198,8 +192,7 @@ class Database extends PDO {
 		$analise = ($proj->getAnalise() == 0) ? 1 : 0;
 		$id = $proj->getId();
 		$sql = "UPDATE projeto set analise = $analise WHERE id = $id";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
 
 		$proj->setAnalise($analise);
 
@@ -260,9 +253,7 @@ class Database extends PDO {
 		// implementar
 		$sql = 'SELECT idUser, idCategoria, nome, descricao, frase, valor, valorArrecadado, prazo, video, links, ativo, analise, dataRegistro, dataAtivacao, categoria 
 		FROM projeto, categoria WHERE projeto.idCategoria = categoria.id AND projeto.id = ' . $id;
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 
 		$projeto = new Projeto;
 
@@ -311,8 +302,7 @@ class Database extends PDO {
 			$sql = "INSERT INTO projeto 
 			(idUser, idCategoria, nome, descricao, frase, valor, valorArrecadado, prazo, video, links, ativo, analise) 
 			VALUES ($idUser, $idCategoria, '$nome', '$descricao', '$frase', $valor, $valorArrecadado,  $prazo, '$video', '$links', $ativo, $analise)";
-			$stmt = $this->prepare($sql);
-			$result = $stmt->execute();
+			$result = $this->execute($sql);
 			$projeto->setId($this->lastInsertId());
 
 			return $projeto;
@@ -329,8 +319,7 @@ class Database extends PDO {
 			links='$links', ativo=$ativo, analise=$analise   
 			WHERE id = $id";
 
-			$stmt = $this->prepare($sql);
-			$result = $stmt->execute();
+			$result = $this->execute($sql);
 
 			return $projeto;
 
@@ -345,9 +334,7 @@ class Database extends PDO {
 	public function getColaboracao($id) {
 		$sql = 'SELECT idProjeto, valor, descricao, qtdTotal, qtdComprada 
 		FROM colaboracao WHERE id = ' . $id;
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 
 		$colaboracao = new Colaboracao;
 		$colaboracao->setId($id);
@@ -363,9 +350,7 @@ class Database extends PDO {
 	public function getColaboracaoByProjeto($idProjeto) {
 		$sql = 'SELECT id, valor, descricao, qtdTotal, qtdComprada 
 		FROM colaboracao WHERE idProjeto = ' . $idProjeto;
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 		
 		$colArray = array();
 		foreach($result as $col) {
@@ -409,8 +394,7 @@ class Database extends PDO {
 			(idProjeto, valor, descricao, qtdTotal, qtdComprada) 
 			values ($idProjeto, $valor, '$descricao', $qtdTotal, $qtdComprada)";
 
-			$stmt = $this->prepare($sql);
-			$result = $stmt->execute();
+			$result = $this->execute($sql);
 
 			$id = $this->lastInsertId();
 			$colaboracao->setId($id);
@@ -421,8 +405,7 @@ class Database extends PDO {
 			SET valor=$valor, descricao='$descricao', qtdTotal=$qtdTotal 
 			WHERE id = $id";
 
-			$stmt = $this->prepare($sql);
-			$result = $stmt->execute();
+			$result = $this->execute($sql);
 			
 		}
 
@@ -437,9 +420,7 @@ class Database extends PDO {
 		//verifica se tem vendas amarradas
 		$sql = 'SELECT COUNT(id) as count FROM user_colaboracao 
 		WHERE idColaboracao =' . $id;
-		$stmt   = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 		$count  = $result[0]['count'];
 
 		if ($count > 0) {
@@ -450,17 +431,14 @@ class Database extends PDO {
 		$sql = 'DELETE FROM colaboracao WHERE id=' . $id;
 		print $sql;
 
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
 
 		return $erro;
 	}
 
 	function getColabBySeed($seed) {
 		$sql = "SELECT idColaboracao FROM user_colaboracao WHERE seed = '$seed'";
-		$stmt   = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 		$idColab = $result[0]['idColaboracao'];
 
 		$colab = $this->getColaboracao($idColab);
@@ -473,8 +451,7 @@ class Database extends PDO {
 		(idUser, idColaboracao, seed) VALUES 
 		($idUser, $idColaboracao, '$seed')";
 
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
 
 		return True;
 
@@ -482,8 +459,7 @@ class Database extends PDO {
 
 	function updateUserColaboracaoBySeed($seed, $statusPagamento) {
 		$sql = "UPDATE user_colaboracao SET statusMoip=$statusPagamento WHERE seed='$seed'";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
+		$result = $this->execute($sql);
 
 		return True;
 
@@ -493,9 +469,7 @@ class Database extends PDO {
 		$sql = 'SELECT idUser, idColaboracao, dataRegistro 
 		FROM user_colaboracao WHERE id = ' . $id;
 
-		$stmt  = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 		
 		$uc = new UserColaboracao;
 		$uc->setId($id);
@@ -528,9 +502,7 @@ class Database extends PDO {
 	#### ADMIN
 	public function getVipList() {
 		$sql = "SELECT email FROM vip";
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 
 		$vip = array();
 		foreach ($result as $v) {
@@ -544,9 +516,7 @@ class Database extends PDO {
 		$sql = 'SELECT projeto.id as id, idCategoria, categoria, nome 
 		FROM projeto, categoria 
 		WHERE analise = 1 AND projeto.idCategoria = categoria.id';
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 
 		return $result;
 	}
@@ -555,9 +525,7 @@ class Database extends PDO {
 		$sql = 'SELECT projeto.id as id, idCategoria, categoria, nome 
 		FROM projeto, categoria 
 		WHERE ativo = 1 AND projeto.idCategoria = categoria.id';
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 
 		return $result;
 	}
@@ -566,9 +534,7 @@ class Database extends PDO {
 		$sql = 'SELECT user.nome as nome, email FROM user, projeto 
 		WHERE projeto.idUser = user.id AND projeto.id = ' . $idProjeto;
 
-		$stmt = $this->prepare($sql);
-		$result = $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result = $this->select($sql);
 
 		return $result[0];
 	}
