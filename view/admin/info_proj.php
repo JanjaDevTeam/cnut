@@ -31,6 +31,7 @@
 	<br/>
 <?php if($data['projAnalise'] == 1 && $data['projAtivo'] == 0): ?>
 	<a href="adm_ativar_proj.php?id=<?=$data['id']?>">Clique para ativar o projeto</a><br/><br/>
+	<a href="alterar_projeto.php?id=<?=$data['id']?>&admin=1" target='blank'>Clique para editar o projeto</a><br/><br/>
 	<a href="adm_devolver_proj.php?id=<?=$data['id']?>">Clique para devolver o projeto</a>
 <?php endif; ?>
 

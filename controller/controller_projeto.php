@@ -18,10 +18,7 @@ class ControllerProjeto {
 		$nome = explode(' ', $nome);
 		$nome = $nome[0];		
 		// calcula quantas colaborações foram compradas
-		$backers = 0;
-		foreach ($colaboracao as $col) {
-			$backers += $col['qtdComprada'];
-		}
+		$backers = $db->getBackersByProjeto($id);
 		$proj->setColaboracao($colaboracao);
 		
 		// id do video para embed

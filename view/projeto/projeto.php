@@ -1,5 +1,8 @@
 <div id="quadroProjeto">
 	<div class="container">
+		<?php if(isset($template['action']) && $template['action']=='alt'):?>
+		<div class="alert alert-success"><p>Projeto alterado com sucesso.</p></div>
+		<?php endif; ?>
 		<h2><?=$template['nome']?></h2>
 		<h4>(<?=$template['categoria']?>)</h4>
 		<br/>
@@ -12,27 +15,28 @@
 		
 		<!-- somente logado -->
 		<?php if(isset($template['session']) && $template['session'] = 'owner'): ?>
-		<?php if(isset($template['msg'])): ?>
-		<div class="alert alert-info">
-			<p><?=$template['msg']?></p>
-		</div>
-		<?php endif; ?>
-		
-		<div class="btn-group">
-			<?php if($template['analise'] == 1): ?>
-				<a href="#" class="btn btn-danger">Em análise</a>
-			<?php else: ?>
-				<a href="alterar_projeto.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Alterar</a>
-				<?php if(!isset($template['bloqueado'])): ?>
-				<a href="analise.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Enviar para análise</a>
-				<?php endif; ?>
-				<a href="colaboracao.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Apoio</a>
+			<?php if(isset($template['msg'])): ?>
+			<div class="alert alert-info">
+				<p><?=$template['msg']?></p>
+			</div>
 			<?php endif; ?>
 			
-			
-		</div>
-		<br/>
-		<br/>
+
+			<?php if($template['ativo'] == 0): ?>
+				<div class="btn-group">
+					<?php if($template['analise'] == 1): ?>
+						<a href="#" class="btn btn-danger">Em análise</a>
+					<?php else: ?>
+						<a href="alterar_projeto.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Alterar</a>
+						<?php if(!isset($template['bloqueado'])): ?>
+						<a href="analise.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Enviar para análise</a>
+						<?php endif; ?>
+						<a href="colaboracao.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Apoio</a>
+					<?php endif; ?>
+				</div>
+				<br/>
+				<br/>
+			<?php endif; ?>
 		<?php endif; ?>
 		<!-- /temp -->
 		
@@ -75,9 +79,13 @@
 		<div class="quadroApoio">
 			<h4><strong>R$<?=$apoio['valor']?></strong></h4>
 			<p><?=$apoio['descricao']?></p>
-			<?php if(isset($_SESSION['id'])):?>
+
+
+			<?php if(isset($_SESSION['id']) && $template['ativo'] == 1 ):?>
 			<a href="colaborar.php?id=<?=$apoio['id']?>">apoiar</a>
 			<?php endif; ?>
+
+
 			<?php if($count < sizeof($template['apoio'])):?>
 			<hr/>
 			<?php endif; ?>

@@ -8,6 +8,7 @@
 <a href="projeto.php?id=<?=$template['idProjeto']?>" class="btn btn-primary">Voltar</a>
 <hr/>
 <?php foreach($template['colab'] as $colab): ?>
+	<p>R$ <?=$colab['valor']?></p>
 	<p><?=$colab['descricao']?></p>
 	<?php if($colab['qtdTotal'] == 0): ?>
 		<p>Quantidade: ilimitada</p>

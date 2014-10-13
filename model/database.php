@@ -383,6 +383,17 @@ class Database extends PDO {
 		return $colArray;
 	}
 
+	public function getBackersByProjeto($id) {
+		$sql = "SELECT DISTINCT user_colaboracao.idUser as id from user_colaboracao, colaboracao, projeto WHERE 
+		user_colaboracao.idColaboracao = colaboracao.id 
+		AND colaboracao.idProjeto = projeto.id 
+		AND projeto.id = " . $id;
+
+		$result = $this->select($sql);
+
+		return $result;
+	}
+
 
 	public function saveColaboracao($colaboracao) {
 

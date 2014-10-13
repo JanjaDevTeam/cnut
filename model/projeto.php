@@ -170,10 +170,13 @@ class Projeto {
 				$diasRestantes -= 1;
 			}
 		} else {
-			$diasRestantes = 'x';
+			$diasRestantes = $this->getPrazo();
 		}
+
+		// caso menor que 0, -> 0
+		$diasRestantes = ($diasRestantes < 0)? 0 : $diasRestantes;
 			
-			return $diasRestantes;
+		return $diasRestantes;
 	}
 
 

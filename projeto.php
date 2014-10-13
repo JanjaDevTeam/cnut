@@ -16,7 +16,7 @@ $proj = $ct->getProjetoCompleto($id);
 $template['nome']          = $proj['projeto']->getNome();
 $template['categoria']     = $proj['projeto']->getCategoria();
 $template['video']         = $proj['videoId'];
-$template['backers']       = $proj['backers'];
+$template['backers']       = sizeof($proj['backers']);
 $template['arrecadado']    = $proj['projeto']->getValorArrecadado();
 $template['diasRestantes'] = $proj['diasRestantes'];
 $template['total']         = $proj['projeto']->getValor();
@@ -29,6 +29,11 @@ $template['analise']       = $proj['projeto']->getAnalise();
 $template['ativo']         = $proj['projeto']->getAtivo();
 $template['pct']           = $proj['projeto']->getPorcentagem();
 $template['page']          = "projeto/projeto";
+
+$template['session'] = ''; // inicia variável
+if (isset($_GET['action']) && $_GET['action'] == 'alt') { 
+	$template['action'] = 'alt';
+}
 
 // verifica se é o dono
 if (isset($_SESSION['id'])) {
