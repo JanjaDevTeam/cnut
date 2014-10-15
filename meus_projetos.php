@@ -7,6 +7,7 @@ session_start();
 $ct = new ControllerProjeto;
 
 $template['projetos'] = $ct->getProjetosByOwner($_SESSION['id']);
+//Janja::Debug($template['projetos']); exit;
 
 $template['menuPerfil'] = 2;
 $template['page'] = "user/meus_projetos";

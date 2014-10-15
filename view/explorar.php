@@ -59,32 +59,32 @@
 		<div class='card'>
 
 			<div class='col-sm-12'>
-				<a href='projeto.php?id=<?=$proj['id']?>'><img src='<?=$proj['coverArt']?>'/></a>
+				<a href='projeto.php?id=<?=$proj['projeto']->getId()?>'><img src='<?=$proj['projeto']->getImage()?>'/></a>
 			</div>
 
 			<div class='cardTextoContainer'>
 				<div class='col-sm-12 cardNome'>
 					<h4>
-						<?php if($proj['pct'] >= 100): ?>
+						<?php if($proj['projeto']->getPorcentagem() >= 100): ?>
 						<img src='img/medal.png' class='medal' style="width: 16px;"/>
-						<?php endif; ?><?=$proj['nome']?>
+						<?php endif; ?><?=$proj['projeto']->getNome()?>
 					</h4>
 				</div>
 				<div class='col-sm-12 cardCategoria'>
-					<?=$proj['categoria']?>
+					<?=$proj['projeto']->getCategoria()?>
 				</div>
 
 				<div class='col-sm-12 cardFrase'>
-					<?=$proj['frase']?>
+					<?=$proj['projeto']->getFrase()?>
 				</div>
 				<div class='col-sm-12 cardFinanciado'>
-					<strong><?=$proj['pct']?>% financiados
+					<strong><?=$proj['projeto']->getPorcentagem()?>% financiados
 				</div>
 
 				<div class='col-sm-12'>
 					<div class='barraContainer'>
 						<?php 
-						$barra = ($proj['pct'] > 100)? 100 : $proj['pct'];
+						$barra = ($proj['projeto']->getPorcentagem() > 100)? 100 : $proj['projeto']->getPorcentagem();
 						?>
 						<div class='barra' style='width: <?=$barra?>%'></div>
 					</div>
@@ -93,7 +93,7 @@
 				<div class='row'>
 					<div class='col-xs-6'>
 						<div class='col-sm-12 cardArrecadado'>
-							<strong>R$&nbsp;<?=$proj['valorArrecadado']?></strong>
+							<strong>R$&nbsp;<?=$proj['projeto']->getValorArrecadado()?></strong>
 						</div>
 						<div class='col-xs-12 cardArrecadado'>
 							arrecadado
@@ -102,7 +102,7 @@
 					
 					<div class='col-sm-6'>
 						<div class='col-sm-12 cardArrecadado'>
-							<strong><?=$proj['diasRestantes']?></strong>&nbsp;dias
+							<strong><?=$proj['projeto']->getDiasRestantes()?></strong>&nbsp;dias
 						</div>
 						<div class='col-sm-12 cardArrecadado'>
 							restantes

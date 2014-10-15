@@ -14,30 +14,18 @@ class ControllerProjeto {
 		
 		// dados do usuário que criou o projeto
 		$user = $db->getUserById($proj->getIdUser());
-		$nome = $user->getNome();
-		$nome = explode(' ', $nome);
-		$nome = $nome[0];		
+				
 		// calcula quantas colaborações foram compradas
 		$backers = $db->getBackersByProjeto($id);
 		$proj->setColaboracao($colaboracao);
 		
 		// id do video para embed
-		$data['videoId'] = $proj->getVideo();
-		$data['coverArt'] = $proj->getImage();
+
 		$data['backers'] = $backers;
 		$data['projeto'] = $proj;
-		$data['diasRestantes'] = $proj->getDiasRestantes();
 		$data['idProponente'] = $user->getId();
-		$data['proponente'] = $nome;
-		$data['pct'] = $proj->getPorcentagem();
-		$data['categoria'] = $proj->getCategoria();
-		$data['prazo'] = $proj->getPrazo();
-		$data['nome'] = $proj->getNome();
-		$data['frase'] = $proj->getFrase();
-		$data['valor'] = $proj->getValor();
-		$data['valorArrecadado'] = $proj->getValorArrecadado();
-		$data['id'] = $proj->getId();
-		$data['categoria'] = $proj->getCategoria();
+		$data['proponente'] = $user;
+		
 
 		// foto
 		$fotoPath = "img/userpics/" . $user->getId() . ".jpg";

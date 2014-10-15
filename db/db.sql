@@ -64,7 +64,7 @@ CREATE TABLE colaboracao (
 	qtdTotal INT NOT NULL,
 	qtdComprada INT NOT NULL,
 	PRIMARY KEY(id),
-	FOREIGN KEY (idProjeto) REFERENCES projeto(id) ON DELETE CASCADE
+	FOREIGN KEY (idProjeto) REFERENCES projeto(id) ON DELETE RESTRICT
 )ENGINE=InnoDB;
 
 CREATE TABLE user_colaboracao (
@@ -74,9 +74,7 @@ CREATE TABLE user_colaboracao (
 	seed CHAR(32) NOT NULL,
 	dataRegistro TIMESTAMP NOT NULL DEFAULT NOW(),
 	statusMoip INT NULL,
-	PRIMARY KEY(id),
-	FOREIGN KEY (idUser) REFERENCES user(id) ON DELETE RESTRICT,
-	FOREIGN KEY (idColaboracao) REFERENCES colaboracao(id) ON DELETE RESTRICT
+	PRIMARY KEY(id)
 )ENGINE=InnoDB;
 
 # moip
@@ -119,3 +117,5 @@ INSERT INTO categoria (categoria) VALUES ('mobilidade urbana');
 INSERT INTO categoria (categoria) VALUES ('intervenção urbana');
 INSERT INTO categoria (categoria) VALUES ('arte de rua');
 INSERT INTO categoria (categoria) VALUES ('inclusão social');
+
+INSERT INTO vip (email) VALUES ('brunocanongia@gmail.com');

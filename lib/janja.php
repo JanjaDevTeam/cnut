@@ -20,7 +20,12 @@ class Janja {
 			$userpic = "img/user-default.jpg";
 		}
 
-		return $userpic . '?' . (string)(date('H-i-s'));
+
+		if (isset($_SESSION['fbId'])) {
+			return $userpic;
+		} else {
+			return $userpic . '?' . (string)(date('H-i-s'));
+		}
 
 	}
 	

@@ -42,6 +42,9 @@
 		
 		<p class="lead"><?=$template['frase']?></p>
 		<p><?=$template['descricao']?></p>
+		<br/>
+		<br/>
+		<br/>
 	</div>
 	<div class="col-sm-4">
 		<h1><?=$template['backers']?></h1><h4> participantes</h4>
@@ -53,7 +56,7 @@
 			<p><?=$template['pct']?> % arrecadado</p>
 			<div class='barraContainer'>
 				<?php 
-				$barra = ($proj['pct'] > 100)? 100 : $proj['pct'];
+				$barra = ($template['pct'] > 100)? 100 : $template['pct'];
 				?>
 				<div class='barra' style='width: <?=$barra?>%'></div>
 			</div>
@@ -97,3 +100,4 @@
 	<br/>
 	<br/>
 </div>
+

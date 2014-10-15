@@ -15,12 +15,14 @@ $proj = $ct->getProjetoCompleto($id);
 
 $template['nome']          = $proj['projeto']->getNome();
 $template['categoria']     = $proj['projeto']->getCategoria();
-$template['video']         = $proj['videoId'];
+$template['video']         = $proj['projeto']->getVideo();
 $template['backers']       = sizeof($proj['backers']);
 $template['arrecadado']    = $proj['projeto']->getValorArrecadado();
-$template['diasRestantes'] = $proj['diasRestantes'];
+$template['diasRestantes'] = $proj['projeto']->getDiasRestantes();
 $template['total']         = $proj['projeto']->getValor();
-$template['proponente']    = $proj['proponente'];
+$nome = $proj['proponente']->getNome();
+$nome = explode(' ', $nome);
+$template['proponente'] = $nome[0];
 $template['frase']         = $proj['projeto']->getFrase();
 $template['descricao']     = $proj['projeto']->getDescricao();
 $template['apoio']         = $proj['projeto']->getColaboracao();

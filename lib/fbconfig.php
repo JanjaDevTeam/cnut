@@ -1,5 +1,6 @@
 <?php
 require 'lib/facebook/facebook.php';  // Include facebook SDK file
+
 $facebook = new Facebook(array(
   'appId'  => '502879809833680',   // Facebook App ID 
   'secret' => '9c1c07be8d04747eaef0e81db1ff5e32',  // Facebook App Secret
