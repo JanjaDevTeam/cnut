@@ -26,7 +26,7 @@
 <?php endforeach; ?>
 
 <div class="col-sm-6 col-lg-4">
-	<h2>Nova colaboração</h2>
+	<h2>Nova contrapartida</h2>
 	<form name="formColaboracao" method="post" action="colaboracao.php" onsubmit="return validaFormColaboracao()">
 		<div class="form-group">
 			<label for="inputValor">Valor (em R$ sem vírgula ou ponto)</label>

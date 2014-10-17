@@ -31,7 +31,7 @@
 						<?php if(!isset($template['bloqueado'])): ?>
 						<a href="analise.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Enviar para análise</a>
 						<?php endif; ?>
-						<a href="colaboracao.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Apoio</a>
+						<a href="colaboracao.php?id=<?=$template['idProjeto']?>" class="btn btn-default">Valores de apoio</a>
 					<?php endif; ?>
 				</div>
 				<br/>
