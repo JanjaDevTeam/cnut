@@ -7,7 +7,7 @@
 <br/>
 <form action='colaborar_moip.php' method='post'>
 	<input type="hidden" name="id" value="<?=$template['id']?>"/>
-	<input type="submit" class="btn btn-success" value="Colaborar"/>
+	<input type="submit" class="btn btn-success" value="Apoiar"/>
 </form>
 <br/>
 <button class='btn btn-primary' onclick='window.history.back()'>Voltar</button>

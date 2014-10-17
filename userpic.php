@@ -1,7 +1,10 @@
 <?php
 require_once('lib/janja.php');
+require_once('model/database.php');
 
 session_start();
+
+$db = new Database;
 
 if(isset($_FILES['upfile'])) {
 	$tmp = $_FILES['upfile']['tmp_name'];

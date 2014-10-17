@@ -11,6 +11,9 @@
 			<div class="account-wall">
 				<img class="profile-img" src="img/login.png"
 				alt="">
+				<?php if(isset($template['erro'])): ?>
+					<div class="alert alert-danger">Erro logando.</div>
+				<?php endif; ?>
 				<form class="form-signin" action="logar.php" method="post">
 					<input type="text" name="email" class="form-control" placeholder="Email" required autofocus>
 					<input type="password" name="senha" class="form-control" placeholder="Senha" required>

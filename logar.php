@@ -26,7 +26,7 @@ if (isset($_POST['email'])) {
 	if ($logar == true) {
 		header('location: index.php');
 	} else {
-		header('location: forbiden.php');
+		$template['erro'] = 1;
 	}
 }
 

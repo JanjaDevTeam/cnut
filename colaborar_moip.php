@@ -16,7 +16,7 @@ $ct->comprarCotas($idUser, $_POST['id'], $seed);
 $moip = new MoIP;
 $moip->setCredential(array("key"=>"4VQGQOGKWA1QBHJEOR0HTAXNFSYIYNRYK9BDZ6YU", "token"=>"JB2QWDEXN3HKYH28JBZUFKFWHI1PJMJZ"));
 $moip->setUniqueId($seed);
-$moip->setReason('Coconut - Fase de testes');
+$moip->setReason('Solucionatica - Fase de testes');
 $moip->setValue($colab->getValor());
 $moip->setEnvironment('test');
 $moip->setReturnURL('http://177.96.222.22:8081/cnut/projetos_apoiados.php');
