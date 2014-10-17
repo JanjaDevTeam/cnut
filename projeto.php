@@ -5,6 +5,8 @@ require_once('controller/controller_projeto.php');
 require_once('lib/janja.php');
 
 session_start();
+
+
 $db = new Database;
 $ct = new ControllerProjeto;
 
@@ -23,6 +25,7 @@ $template['total']         = $proj['projeto']->getValor();
 $nome = $proj['proponente']->getNome();
 $nome = explode(' ', $nome);
 $template['proponente'] = $nome[0];
+$template['fotoProponente'] = Janja::fotoById($proj['projeto']->getIdUser());
 $template['frase']         = $proj['projeto']->getFrase();
 $template['descricao']     = $proj['projeto']->getDescricao();
 $template['apoio']         = $proj['projeto']->getColaboracao();
@@ -31,6 +34,15 @@ $template['analise']       = $proj['projeto']->getAnalise();
 $template['ativo']         = $proj['projeto']->getAtivo();
 $template['pct']           = $proj['projeto']->getPorcentagem();
 $template['page']          = "projeto/projeto";
+
+// gauge
+$valor = $proj['projeto']->getValor();
+$valorArrecadado = $proj['projeto']->getValorArrecadado();
+$diasRestantes = $proj['projeto']->getDiasRestantes();
+$prazo = $proj['projeto']->getPrazo();
+
+$gauge = (((double)$valorArrecadado/(double)$valor) + ((double)$diasRestantes/(double)$prazo)) / 2.0;
+$template['gauge'] = round($gauge * 100);
 
 $template['session'] = ''; // inicia variável
 if (isset($_GET['action']) && $_GET['action'] == 'alt') { 
@@ -63,6 +75,6 @@ if (isset($_SESSION['id'])) {
 
 
 $template['menu'] = 'explorar';
-require_once('template/main.php');
+require_once('template/projeto.php');
 
 ?>

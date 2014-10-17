@@ -40,9 +40,9 @@ $data['projAtivo'] = $proj->getAtivo();
 
 $ct = new ControllerProjeto;
 $projArray = $ct->getProjetoCompleto($id);
-$data['diasRestantes']   = $projArray['diasRestantes'];
-$data['prazo']           = $projArray['prazo'];
-$data['pct']             = $projArray['pct'];
+$data['diasRestantes']   = $projArray['projeto']->getDiasRestantes();
+$data['prazo']           = $projArray['projeto']->getPrazo();
+$data['pct']             = $projArray['projeto']->getPorcentagem();
 
 
 $template['page'] = "admin/info_proj";

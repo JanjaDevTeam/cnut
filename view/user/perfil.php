@@ -16,5 +16,7 @@ require_once('view/user/perfil_menu.php');
 	</div>
 </div>
 
+<?php Janja::Debug($_SESSION); ?>
+
 
 

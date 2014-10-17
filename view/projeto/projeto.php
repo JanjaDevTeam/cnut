@@ -66,7 +66,7 @@
 		
 		<div class="quadroProponente">
 			<div class="">
-				<img src="img/userpics/1.jpg"/>
+				<img src="<?=$template['fotoProponente']?>"/>
 			</div>
 			<div class="quadroProponenteDados">
 				<span><?=$template['proponente']?></span>
@@ -95,6 +95,8 @@
 		</div>
 		<?php endforeach; ?>
 		<br/>
+		<div id="chart_div" style=""></div>
+
 		
 	</div>
 	<br/>

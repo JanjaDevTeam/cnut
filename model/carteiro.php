@@ -8,7 +8,7 @@ class Carteiro {
 
 		$msg = "Bem vindo à Solucionática\n\n" .
 		"Para completar seu cadastro clique aqui: \n" .
-		"http://rc2.co/coconut/ativar.php?t=$token" .
+		"http://rc2.co/cnut/ativar.php?t=$token" .
 		"\n\nEste link é válido por 24 horas.";
 
 		mail ( $email , $assunto , $msg );
@@ -22,7 +22,7 @@ class Carteiro {
 
 		$msg = "Solucionática\n\n" .
 		"Para redefinir sua senha clique aqui: \n" .
-		"http://rc2.co/coconut/recuperar_senha.php?t=$token" .
+		"http://rc2.co/cnut/recuperar_senha.php?t=$token" .
 		"\n\nEste link é válido por 24 horas.";
 
 		mail ( $email , $assunto , $msg );

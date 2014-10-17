@@ -19,7 +19,6 @@ class ControllerLogin {
 			copy($url, $img);
 			
 		} else {
-			echo "usuario não existe, cadastrar";
 			$user = new User;
 			
 			// cadastra o usuário

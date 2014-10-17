@@ -21,7 +21,7 @@
 <br/><br/>
 <div class='row'>
 		<?php foreach($template['categorias'] as $cat): ?>
-		<div class='col-sm-3'>
+		<div class='col-sm-4 col-md-3'>
 			<a href='explorar.php?idCat=<?=$cat['id']?>' class=''><?=$cat['categoria']?></a>
 		</div>
 		<?php endforeach; ?>

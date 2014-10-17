@@ -13,7 +13,6 @@ if (isset($_POST['nome'])) {
 	$proj->setIdCategoria($_POST['categoria']);
 	$proj->setDescricao($_POST['descricao']);
 	$proj->setFrase($_POST['frase']);
-	$proj->setIdCategoria($_POST['categoria']);
 	$proj->setValor((int)$_POST['valor']);
 	$proj->setPrazo((int)$_POST['prazo']);
 	$proj->setVideo($_POST['video']);
@@ -37,8 +36,6 @@ if (isset($_POST['nome'])) {
 	$template['page'] = 'projeto/form_projeto';
 	require_once('template/editor.php');	
 }
-
-
 
 
 ?>

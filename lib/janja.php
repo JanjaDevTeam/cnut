@@ -28,6 +28,15 @@ class Janja {
 		}
 
 	}
+
+	static function fotoById($id) {
+		$foto = 'img/userpics/' . $id . '-fb.jpg';
+		if (file_exists($foto)) {
+			return $foto;
+		} else {
+			return 'img/userpics/' . $id . '.jpg';
+		}
+	}
 	
 	
 	static function menuAdmin($selecionado=0) {
@@ -52,6 +61,41 @@ class Janja {
 		}
 
 		return $result;
+	}
+
+	static function statusMoip($i) {
+		$msg = "";
+		switch ($i) {
+			case 1: 
+				$msg = "autorizado";
+				break;
+			case 2: 
+				$msg = "iniciado";
+				break;
+			case 3: 
+				$msg = "boleto impresso";
+				break;
+			case 4: 
+				$msg = "concluido";
+				break;
+			case 5: 
+				$msg = "cancelado";
+				break;
+			case 6: 
+				$msg = "em análise";
+				break;
+			case 7: 
+				$msg = "estornado";
+				break;
+			case 8: 
+				$msg = "em revisão";
+				break;
+			case 9: 
+				$msg = "reembolsado";
+				break;
+		}
+
+		return $msg;
 	}
 }
 ?>

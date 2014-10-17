@@ -6,7 +6,7 @@ require_once('view/user/perfil_menu.php');
 
 <?php foreach($template['projetos'] as $proj): ?>
 	<div class='row container-apoiados'>
-		<div class='col-sm-3 col-md-2'><a href="projeto.php?id=<?=$proj['id']?>"><img src='<?=$proj['projeto']->getImage()?>' style="width: 100%;" class=""/></a></div>
+		<div class='col-sm-3 col-md-2'><a href="projeto.php?id=<?=$proj['projeto']->getId()?>"><img src='<?=$proj['projeto']->getImage()?>' style="width: 100%;" class=""/></a></div>
 		<div class='col-sm-9' col-md-10>
 
 			<h4>

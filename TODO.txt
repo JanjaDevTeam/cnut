@@ -1,3 +1,5 @@
 ### TODO
 
 * cadastros únicos de usuário e projeto
+* mensagem de erro logando, ao invés de forbidden
+* 
