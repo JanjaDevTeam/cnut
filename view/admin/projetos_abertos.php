@@ -1,4 +1,6 @@
-<h2>Projetos abertos (<?=$data['qtdAbertos']?>)</h2>
+<br/>
+<h3>Projetos abertos (<?=$template['qtdAbertos']?>)</h3>
+<br/>
 <table class='table'>
 	<thead>
 		<tr>
@@ -11,7 +13,7 @@
 	</thead>
 	<tbody>
 		<?php
-		foreach($data['projetos'] as $proj) {?>
+		foreach($template['projetos'] as $proj) {?>
 		<tr>
 			<td class='editar'><?= $proj['id']?></td>
 			<td><?= $proj['categoria']?></td>

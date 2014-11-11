@@ -23,12 +23,30 @@ $proj = $db->getProjeto($idProj);
 //file_put_contents('output.txt', print_r($colab, true));
 
 // atualiza valores do projeto
-if ($data['statusPagamento'] == 4) {  //implementar!
+if ($data['statusPagamento'] == 4) {
 	$valor = $colab->getValor();
 	$valorArrecadado = $proj->getValorArrecadado();
 	$valorArrecadado += $valor;
 	$proj->setValorArrecadado($valorArrecadado);
 	$proj = $db->saveProjeto($proj);
+
+	$qtdComprada = $colab->getQtdComprada();
+	$qtdComprada += 1;
+	$colab->setQtdComprada($qtdComprada);
+	$colab = $db->saveColaboracao($colab);
+}
+
+if ($data['statusPagamento'] == 7) {  //implementar redução de backer
+	$valor = $colab->getValor();
+	$valorArrecadado = $proj->getValorArrecadado();
+	$valorArrecadado -= $valor;
+	$proj->setValorArrecadado($valorArrecadado);
+	$proj = $db->saveProjeto($proj);
+
+	$qtdComprada = $colab->getQtdComprada();
+	$qtdComprada -= 1;
+	$colab->setQtdComprada($qtdComprada);
+	$colab = $db->saveColaboracao($colab);
 }
 
 ?>

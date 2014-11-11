@@ -13,9 +13,9 @@ if(!isset($_SESSION['email']) || !in_array($_SESSION['email'], $vip)) {
 	exit;
 }
 
-$data['menuAtivo'] = 0;
+$template['menuAtivo'] = 0;
 $nome = explode(" ", $_SESSION['nome']);
-$data['username'] = $nome[0];
+$template['username'] = $nome[0];
 
 /*
 $lista = $db->getAbertosList();

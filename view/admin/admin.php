@@ -1,1 +1,3 @@
-<h2> Bem vindo à área administrativa</h2>
+<div class='alert alert-info'>
+<p>Bem vindo à área administrativa.</p>
+</div>

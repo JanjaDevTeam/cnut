@@ -16,12 +16,12 @@ if(!isset($_SESSION['email']) || !in_array($_SESSION['email'], $vip)) {
 }
 
 
-$data['menuAtivo'] = 1;
+$template['menuAtivo'] = 1;
 $nome = explode(" ", $_SESSION['nome']);
-$data['username'] = $nome[0];
+$template['username'] = $nome[0];
 
-$data['projetos'] = $db->getAbertosList();
-$data['qtdAbertos'] = sizeof($data['projetos']);
+$template['projetos'] = $db->getAbertosList();
+$template['qtdAbertos'] = sizeof($template['projetos']);
 
 $template['page'] = "admin/projetos_abertos";
 require_once("template/admin.php");

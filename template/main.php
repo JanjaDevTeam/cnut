@@ -8,7 +8,11 @@
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		
 		<link href="css/main.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+
+		
 		
 		
 
@@ -19,6 +23,7 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script src="lib/janja.js"></script>
+
 
 	</head>
 	<body>

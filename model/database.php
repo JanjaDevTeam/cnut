@@ -402,7 +402,7 @@ class Database extends PDO {
 		} else {
 			$colaboracao->setId($id);
 			$sql = "UPDATE colaboracao 
-			SET valor=$valor, descricao='$descricao', qtdTotal=$qtdTotal 
+			SET valor=$valor, descricao='$descricao', qtdComprada=$qtdComprada, qtdTotal=$qtdTotal 
 			WHERE id = $id";
 
 			$result = $this->execute($sql);

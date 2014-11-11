@@ -14,7 +14,6 @@ $id = $_GET['id'];
 
 $proj = $ct->getProjetoCompleto($id);
 
-
 $template['nome']          = $proj['projeto']->getNome();
 $template['categoria']     = $proj['projeto']->getCategoria();
 $template['video']         = $proj['projeto']->getVideo();
@@ -43,6 +42,10 @@ $prazo = $proj['projeto']->getPrazo();
 
 $gauge = (((double)$valorArrecadado/(double)$valor) + ((double)$diasRestantes/(double)$prazo)) / 2.0;
 $template['gauge'] = round($gauge * 100);
+
+if($valorArrecadado >= $valor) { 
+	$template['gauge'] = 100;
+}
 
 $template['session'] = ''; // inicia variável
 if (isset($_GET['action']) && $_GET['action'] == 'alt') { 

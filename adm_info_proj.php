@@ -16,33 +16,33 @@ if(!isset($_SESSION['email']) || !in_array($_SESSION['email'], $vip)) {
 	exit;
 }
 
-$data['menuAtivo'] = $_GET['local'] == "ativos" ? 2 : 1;
+$template['menuAtivo'] = $_GET['local'] == "ativos" ? 2 : 1;
 
 $nome = explode(" ", $_SESSION['nome']);
-$data['username'] = $nome[0];
+$template['username'] = $nome[0];
 
 $id = $_GET['id'];
 
 $proj = $db->getProjeto($id);
 
-$data['id'] = $id;
-$data['nome'] = $proj->getNome();
-$data['categoria'] = $proj->getCategoria();
+$template['id'] = $id;
+$template['nome'] = $proj->getNome();
+$template['categoria'] = $proj->getCategoria();
 $owner = $db->getOwnerInfo($id);
-$data['owner'] = $owner['nome'];
-$data['email'] = $owner['email'];
-$data['ativo'] = ($proj->getAtivo() == 0) ? "Inativo" : "Ativo";
-$data['analise'] = ($proj->getAnalise() == 0) ? "Não enviado" : "Em análise";
-$data['projAnalise'] = $proj->getAnalise();
-$data['projAtivo'] = $proj->getAtivo();
+$template['owner'] = $owner['nome'];
+$template['email'] = $owner['email'];
+$template['ativo'] = ($proj->getAtivo() == 0) ? "Inativo" : "Ativo";
+$template['analise'] = ($proj->getAnalise() == 0) ? "Não enviado" : "Em análise";
+$template['projAnalise'] = $proj->getAnalise();
+$template['projAtivo'] = $proj->getAtivo();
 
 
 
 $ct = new ControllerProjeto;
 $projArray = $ct->getProjetoCompleto($id);
-$data['diasRestantes']   = $projArray['projeto']->getDiasRestantes();
-$data['prazo']           = $projArray['projeto']->getPrazo();
-$data['pct']             = $projArray['projeto']->getPorcentagem();
+$template['diasRestantes']   = $projArray['projeto']->getDiasRestantes();
+$template['prazo']           = $projArray['projeto']->getPrazo();
+$template['pct']             = $projArray['projeto']->getPorcentagem();
 
 
 $template['page'] = "admin/info_proj";
